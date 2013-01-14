@@ -78,7 +78,7 @@ namespace :install do
 
   desc 'Add all symlinks'
   task :symlinks do
-    %w{vimrc gvimrc ackrc ctags irbrc gemrc bash_profile bashrc vim}.each do |sym|
+    %w{gitignore gitconfig vimrc gvimrc ackrc ctags irbrc gemrc bash_profile bashrc vim}.each do |sym|
       # first, move existing files and directories to NAME.old
       if File.symlink?("#{HOME_DIR}/.#{sym}")
         puts "Removing old symlink for .#{sym}"

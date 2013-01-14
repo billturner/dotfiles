@@ -1,0 +1,25 @@
+[user]
+	name = Bill Turner
+	email = billturner@gmail.com
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	br = branch
+[color]
+	branch = auto
+	status = auto
+	diff = auto
+[mirror]
+	summary = true
+[core]
+	editor = vim
+	excludesfile = /Users/billturner/.gitignore
+[github]
+	user = billturner
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.localized/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
