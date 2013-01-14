@@ -1,0 +1,39 @@
+--recurse=yes
+--tag-relative=yes
+--exclude="\.svn"
+--exclude="\.git"
+--exclude="\.sass-cache"
+--exclude="coverage"
+--exclude="tmp"
+
+--langdef=css
+--langmap=css:.css
+--regex-css=/^[ \t]*\.([A-Za-z_][A-Za-z0-9_:"' \t\-]*)[ \t]*\{/.\1/c,class/
+--regex-css=/^[ \t]*\.([A-Za-z_][A-Za-z0-9_:"' \t\-]*)[ \t]*,/.\1/c,class/
+--regex-css=/,[ \t]*\.([A-Za-z_][A-Za-z0-9_:"' \t\-]*)[ \t]*\{/.\1/c,class/
+--regex-css=/,[ \t]*\.([A-Za-z_][A-Za-z0-9_:"' \t\-]*)[ \t]*,/.\1/c,class/
+--regex-css=/^[ \t]*#([A-Za-z_][A-Za-z0-9_:()="' \t\-]*)[ \t]*\{/#\1/o,object/
+--regex-css=/^[ \t]*#([A-Za-z_][A-Za-z0-9_:()="' \t\-]*)[ \t]*,/#\1/o,object/
+--regex-css=/,[ \t]*#([A-Za-z_][A-Za-z0-9_:()="' \t\-]*)[ \t]*\{/#\1/o,object/
+--regex-css=/,[ \t]*#([A-Za-z_][A-Za-z0-9_:()="' \t\-]*)[ \t]*,/#\1/o,object/
+--regex-css=/^[ \t]*([A-Za-z_][A-Za-z0-9_:()="' \t\-]*)[ \t]*\{/\1/t,tags/
+--regex-css=/^[ \t]*([A-Za-z_][A-Za-z0-9_:()="' \t\-]*)[ \t]*,/\1/t,tags/
+--regex-css=/,[ \t]*([A-Za-z_][A-Za-z0-9_:()="' \t\-]*)[ \t]*\{/\1/t,tags/
+--regex-css=/,[ \t]*([A-Za-z_][A-Za-z0-9_:()="' \t\-]*)[ \t]*,/\1/t,tags/
+--regex-css=/^[ \t]*\*[ \t]*[,{]/*/t,tags/
+
+--langdef=js
+--langmap=js:.js
+--regex-js=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*\{/\1/,object/
+--regex-js=/([A-Za-z0-9._$()]+)[ \t]*[:=][ \t]*function[ \t]*\(/\1/,function/
+--regex-js=/function[ \t]+([A-Za-z0-9._$]+)[ \t]*\(([^)])\)/\1/,function/
+--regex-js=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*\[/\1/,array/
+--regex-js=/([^= ]+)[ \t]*=[ \t]*[^"]'[^']*/\1/,string/
+--regex-js=/([^= ]+)[ \t]*=[ \t]*[^']"[^"]*/\1/,string/
+
+--langdef=coffee
+--langmap=coffee:.coffee
+--regex-coffee=/(^|=[ \t])*class ([A-Za-z.]+)( extends [A-Za-z.]+)?$/\2/c,class/
+--regex-coffee=/^[ \t]*(module\.)?(exports\.)?@?([A-Za-z.]+):.*[-=]>.*$/\3/f,function/
+--regex-coffee=/^[ \t]*(module\.)?(exports\.)?([A-Za-z.]+)[ \t]+=.*[-=]>.*$/\3/f,function/
+--regex-coffee=/^[ \t]*([A-Za-z.]+)[ \t]+=[^->\n]*$/\1/v,variable/
