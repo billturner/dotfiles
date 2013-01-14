@@ -5,6 +5,7 @@ require 'fileutils'
 require 'etc'
 
 HOME_DIR = Etc.getpwuid.dir
+DOTFILES_DIR = File.expand_path(File.dirname(__FILE__))
 
 namespace :setup do
   desc 'Determine if system is ready for all bundles'
@@ -88,7 +89,7 @@ namespace :install do
       end
       # now, add the symlinks
       puts "Adding a symlink for #{sym}"
-      system "ln -nfs #{HOME_DIR}/dotfiles/#{sym} #{HOME_DIR}/.#{sym}"
+      system "ln -nfs #{DOTFILES_DIR}/#{sym} #{HOME_DIR}/.#{sym}"
     end
   end
 end
