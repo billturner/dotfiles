@@ -2,6 +2,9 @@
 
 require 'rake'
 require 'fileutils'
+require 'etc'
+
+HOME_DIR = Etc.getpwuid.dir
 
 namespace :setup do
   desc 'Determine if system is ready for all bundles'
@@ -30,7 +33,7 @@ namespace :install do
   # desc 'Cleanup and initial install'
   # task :initialize do
   #   puts 'Creating swp/ directory...'
-  #   system %Q{ mkdir ~/.vim/swp }
+  #   system %Q{ mkdir #{HOME_DIR}/.vim/swp }
   # end
 
   desc 'Install and update all submodules'
@@ -62,7 +65,7 @@ namespace :install do
   #       mkdir tmp_install && curl -L http://downloads.sourceforge.net/project/ctags/ctags/5.8/ctags-5.8.tar.gz > tmp_install/ctags-5.8.tar.gz &&
   #       cd tmp_install && tar zxvf ctags-5.8.tar.gz && rm ctags-5.8.tar.gz &&
   #       cd ctags-5.8 && ./configure --prefix=/usr/local && make && sudo make install &&
-  #       cd ~/.vim && rm -rf tmp_install
+  #       cd #{HOME_DIR}/.vim && rm -rf tmp_install
   #     }
   #   elsif RUBY_PLATFORM[/linux/] && `cat /etc/issue`[/Ubuntu|Debian/]
   #     puts "Installing exuberant-ctags package (uses 'sudo')"
@@ -76,13 +79,16 @@ namespace :install do
   task :symlinks do
     %w{vimrc gvimrc ackrc ctags irbrc gemrc bash_profile bashrc vim}.each do |sym|
       # first, move existing files and directories to NAME.old
-      if File.exist?("~/.#{sym}")
-        puts "Backing up existing .#{sym} to #{sym}.old"
-        system "mv ~/.#{sym} ~/#{sym}.old"
+      if File.symlink?("#{HOME_DIR}/.#{sym}")
+        puts "Removing old symlink for .#{sym}"
+        system "rm #{HOME_DIR}/.#{sym}"
+      elsif File.exist?("#{HOME_DIR}/.#{sym}") || File.directory?("#{HOME_DIR}/.#{sym}")
+        puts "Backing up existing .#{sym} to .#{sym}.old"
+        system "mv #{HOME_DIR}/.#{sym} #{HOME_DIR}/.#{sym}.old"
       end
       # now, add the symlinks
       puts "Adding a symlink for #{sym}"
-      system "ln -nfs ~/dotfiles/#{sym} ~/.#{sym}"
+      system "ln -nfs #{HOME_DIR}/dotfiles/#{sym} #{HOME_DIR}/.#{sym}"
     end
   end
 end
