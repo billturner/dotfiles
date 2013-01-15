@@ -106,14 +106,8 @@ end
 namespace :update do
   desc 'Update git submodules'
   task :submodules do
-    bundle_dir = File.join(File.expand_path(File.dirname(__FILE__)), 'vim', 'bundle')
-    puts "#{bundle_dir}"
-    Dir.new(bundle_dir).entries.each do |bundle|
-      unless ['.', '..'].include?(bundle)
-        puts "Updating #{bundle}"
-        system "cd #{File.join(bundle_dir, bundle)} && git pull"
-      end
-    end
+    puts "Updating submodules"
+    system "git submodules foreach git pull origin master"
   end
 end
 
