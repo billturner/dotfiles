@@ -70,6 +70,7 @@ alias rvminit="gem install bundler"
 
 # various aliases
 alias pubkey="cat ~/.ssh/id_dsa.pub | pbcopy"
+alias vim="/Applications/MacVim.app/Contents/MacOS/vim"
 
 # functions
 dontindex () {
