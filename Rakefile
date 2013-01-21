@@ -13,9 +13,7 @@ namespace :setup do
     current_vim = `vim --version`
     current_vim_version = current_vim[/\b(\d+(\.\d+)?)\b/].to_f
     messages = ""
-    messages << " * Vim version needs to be >= 7.3 (currently #{current_vim_version})\n" if current_vim_version < 7.3
-    messages << " * Ruby support not built in (needed for Command-T plugin)\n" if current_vim[/-ruby/]
-    messages << " * Python support not built in (needed for ConqueTerm plugin)\n" if current_vim[/-python\b/]
+    messages << " * Ruby support not built in (may be needed for some plugins)\n" if current_vim[/-ruby/]
     if messages.empty?
       puts "The current system Vim seems like it should support this configuration and all bundled plugins!\n"
     else
@@ -31,11 +29,25 @@ namespace :setup do
 end
 
 namespace :install do
-  # desc 'Cleanup and initial install'
-  # task :initialize do
-  #   puts 'Creating swp/ directory...'
-  #   system %Q{ mkdir #{HOME_DIR}/.vim/swp }
-  # end
+  namespace :helpers do
+    desc "Install the helper applications (via Homebrew)"
+    task :mac do
+      if system %Q{ which brew }
+        puts "Installing ack and ctags"
+        system %Q{ brew install ack ctags }
+      else
+        puts "Install homebrew first"
+      end
+    end
+    desc "Install the helper applications (via apt-get)"
+    task :ubuntu do
+      puts "Installing ctags"
+      system %Q{ sudo apt-get install ctags }
+      puts "Installing ack-grep (and adding symlink to ack)"
+      system %Q{ sudo apt-get install ack-grep }
+      system %Q{ sudo dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep }
+    end
+  end
 
   desc 'Install and update all submodules'
   task :submodules do
@@ -43,38 +55,6 @@ namespace :install do
     system %Q{ git submodule init }
     system %Q{ git submodule update }
   end
-
-  # this assumes you at least have curl and a /usr/local/bin directory
-  # desc 'Install the ack standalone if not already installed'
-  # task :ack do
-  #   if system %Q{ which ack }
-  #     puts "Ack is installed"
-  #   else
-  #     puts "ack does not seem to be installed. Installing now."
-  #     system %Q{ curl http://betterthangrep.com/ack-standalone > /tmp/ack } # to get around no sudo on 'curl'
-  #     system %Q{ sudo mv /tmp/ack /usr/local/bin/ack }
-  #     system %Q{ sudo chmod 0755 /usr/local/bin/ack }
-  #   end
-  # end
-
-  # desc 'Install Exuberant-ctags for tags/taglist'
-  # task :ctags do
-  #   # determine platform
-  #   if RUBY_PLATFORM[/darwin/]
-  #     puts "Downloading, compiling, and installing exuberant ctags (uses 'sudo')"
-  #     system %Q{ 
-  #       mkdir tmp_install && curl -L http://downloads.sourceforge.net/project/ctags/ctags/5.8/ctags-5.8.tar.gz > tmp_install/ctags-5.8.tar.gz &&
-  #       cd tmp_install && tar zxvf ctags-5.8.tar.gz && rm ctags-5.8.tar.gz &&
-  #       cd ctags-5.8 && ./configure --prefix=/usr/local && make && sudo make install &&
-  #       cd #{HOME_DIR}/.vim && rm -rf tmp_install
-  #     }
-  #   elsif RUBY_PLATFORM[/linux/] && `cat /etc/issue`[/Ubuntu|Debian/]
-  #     puts "Installing exuberant-ctags package (uses 'sudo')"
-  #     system %Q{ sudo apt-get install exuberant-ctags }
-  #   else
-  #     puts "Don't have an option to install. Sorry."
-  #   end
-  # end
 
   desc 'Add all symlinks'
   task :symlinks do
