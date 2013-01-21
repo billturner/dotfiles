@@ -91,6 +91,16 @@ namespace :install do
       puts "Adding a symlink for #{sym}"
       system "ln -nfs #{DOTFILES_DIR}/#{sym} #{HOME_DIR}/.#{sym}"
     end
+
+    # link personal rc file if found
+    if File.exist?("#{DOTFILES_DIR}/personalrc")
+      if File.symlink?("#{HOME_DIR}/.personalrc")
+        puts "Removing old symlink for .personalrc"
+        system "rm #{HOME_DIR}/.personalrc"
+      end
+      puts "Adding a symlink for .personalrc"
+      system "ln -nfs #{DOTFILES_DIR}/personalrc #{HOME_DIR}/.personalrc"
+    end
   end
 end
 

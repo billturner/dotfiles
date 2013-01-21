@@ -3,7 +3,7 @@
 export GEM_HOME="/Library/Ruby/Gems/1.8"
 export GEM_PATH="/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8"
 export GEM_EDITOR="mate"
-export PATH="/usr/local/bin:/Developer/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/share/npm/bin:/Developer/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
 export LC_CTYPE=en_US.UTF-8
 export EDITOR=mvim
 export EVENT_NOKQUEUE=1
@@ -158,3 +158,6 @@ ps1_set
 
 
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+
+# include a personal rc file if found
+if [ -f ~/.personalrc ]; then source ~/.personalrc ; fi
