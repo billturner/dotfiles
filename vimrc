@@ -80,7 +80,9 @@ map <Leader>q <c-w>q
 cmap w!! w !sudo tee > /dev/null %  " write/save file with sudo
 
 set hidden
-set colorcolumn=80,120
+if exists("&colorcolumn")
+  set colorcolumn=80,120
+endif
 set number
 set backspace=indent,eol,start
 set list

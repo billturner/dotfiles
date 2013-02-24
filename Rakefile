@@ -97,7 +97,7 @@ namespace :update do
   desc 'Update git submodules'
   task :submodules do
     puts "Updating submodules"
-    system "git submodules foreach git pull origin master"
+    system "git submodule foreach git pull origin master"
   end
 end
 
