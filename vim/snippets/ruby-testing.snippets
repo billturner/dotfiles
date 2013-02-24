@@ -1,0 +1,61 @@
+# shared
+snippet context
+	context "${1:context}" do
+		${2}
+	end
+
+# rspec
+snippet describe
+	describe ${1:statement} do
+		${2}
+	end
+snippet it
+	it "${1:context}" do
+		${2}
+	end
+snippet before
+	before :each do
+		${1}
+	end
+snippet after
+	after do
+		${1}
+	end
+snippet skip
+	skip "${1:reason}"
+snippet let
+	let (:${1}) { ${2} }
+snippet subject
+	subject { ${1} }
+snippet expect
+	expect(${1}).to ${2}
+snippet expect!
+	expect(${1}).to_not ${2}
+snippet expect{
+	expect{
+		${1}
+	}.to ${2}
+snippet expect{!
+	expect{
+		${1}
+	}.to_not ${2}
+
+# capybara
+snippet feature
+	feature "${1}" do
+		${2}
+	end
+snippet scenario
+	scenario "${1}" do
+		${2}
+	end
+
+# shoulda
+snippet should
+	should "${1:statement}" do
+		${2}
+	end
+snippet setup
+	setup do
+		${1}
+	end
