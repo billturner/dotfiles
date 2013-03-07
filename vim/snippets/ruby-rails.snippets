@@ -9,4 +9,6 @@ snippet aindex
 snippet rindex
 	remove_index ${1:table}, ${2:field}
 snippet logw
-	logger.warn "${1:message}"
+	Rails.logger.warn "${1}"
+snippet logi
+	Rails.logger.info "${1}"

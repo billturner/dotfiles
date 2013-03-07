@@ -79,6 +79,9 @@ nnoremap <Leader>ll :set list<CR>
 map <Leader>q <c-w>q
 cmap w!! w !sudo tee > /dev/null %  " write/save file with sudo
 
+" stop ex mode
+:nnoremap Q <Nop>
+
 set hidden
 if exists("&colorcolumn")
   set colorcolumn=80,120
@@ -157,6 +160,9 @@ nmap <Leader>] :TagbarToggle<CR>
 
 " ack.vim
 nnoremap <leader>a :Ack<Space>
+
+" fix vim-gitgutter column color
+highlight clear SignColumn
 
 " rubyblock:
 runtime macros/matchit.vim
