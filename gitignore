@@ -2,6 +2,9 @@
 tags
 personalrc
 .watchr
+bootstrap.rake
+.ruby-version
+.ruby-gemset
 
 # for node
 lib-cov
