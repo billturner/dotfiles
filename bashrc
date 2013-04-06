@@ -1,5 +1,4 @@
 # ENV variables
-# export GREP_OPTIONS="-i --exclude=\*.svn\*"
 export GEM_HOME="/Library/Ruby/Gems/1.8"
 export GEM_PATH="/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8"
 export GEM_EDITOR="mate"
@@ -11,16 +10,13 @@ export HISTCONTROL=erasedups
 export ARCHFLAGS='-arch x86_64'
 export AUTOFEATURE=true
 export RUBYOPT="rubygems"
+export TERM="screen-256color"
 
 shopt -s histappend
 
 # db / service aliases
 alias mystart="launchctl load -w ~/Library/LaunchAgents/com.mysql.mysqld.plist"
 alias mystop="launchctl unload -w ~/Library/LaunchAgents/com.mysql.mysqld.plist"
-# alias memstart="sudo launchctl load -w /Library/LaunchDaemons/com.danga.memcached.plist"
-# alias memstop="sudo launchctl unload -w /Library/LaunchDaemons/com.danga.memcached.plist"
-# alias mongostart="sudo launchctl load -w /Library/LaunchDaemons/org.mongodb.mongod.plist"
-# alias mongostop="sudo launchctl unload -w /Library/LaunchDaemons/org.mongodb.mongod.plist"
 alias poststart="launchctl load -w ~/Library/LaunchAgents/org.postgresql.postgres.plist"
 alias poststop="launchctl unload -w ~/Library/LaunchAgents/org.postgresql.postgres.plist"
 
@@ -31,7 +27,13 @@ alias mbash="vim -v ~/.bashrc"
 alias rbash="source ~/.bashrc"
 alias rmds="find . -name *.DS_Store -type f -exec rm {} \;"
 alias vim="mvim -v"
-alias wiki="cd ~/dev/wiki && gollum"
+
+# tmux aliases
+alias tmux="tmux -2"
+alias tmkill="tmux kill-session -t"
+alias tmls="tmux ls"
+alias tmnew="tmux new -s"
+alias tmat="tmux attach-session -t"
 
 # git aliases
 alias gs="git status"
@@ -78,72 +80,10 @@ dontindex () {
   sudo mdutil -E $1;
 }
 
-function gcof {
-  git co feature/$1;
-}
-
-function gpu {
-  if [ $(dirty_branch) -ne 0 ]
-  then
-    echo "Please commit changes first...";
-    return 0;
-  fi
-  rebase_branch=${1:-develop};
-  starting_branch=$(parse_git_branch);
-  echo "Checking out $(rebase_branch) and updating...";
-  # git co $rebase_branch;
-  # git pull;
-  # echo "Going back to $(starting_branch) branch and rebasing...";
-  # git co $starting_branch;
-  # git rebase $rebase_branch;
-}
-
-function dirty_branch {
-  git_status="$(git status 2>/dev/null)"
-  case "$git_status" in
-    *deleted*)
-      return 1;
-      ;;
-    *Untracked[[:space:]]files:*)
-      return 1;
-      ;;
-    *modified:*)
-      return 1;
-      ;;
-  esac
-  return 0
-}
-
-function ruby_version {
-    if [[ -f ~/.rvm/bin/rvm-prompt ]]; then
-        local system=$(~/.rvm/bin/rvm-prompt s)
-        local interp=$(~/.rvm/bin/rvm-prompt i)
-        if [[ ! -n $system ]]; then
-            # Don't show interpreter if it's just MRI
-            case $interp in
-                ruby) echo " [$(~/.rvm/bin/rvm-prompt v g)]" ;;
-                *)    echo " [$(~/.rvm/bin/rvm-prompt i v g)]" ;;
-            esac
-        fi
-    fi
-}
-
-function _rvm_ruby_version {
-  local gemset=$(echo $GEM_HOME | awk -F'@' '{print $2}')
-  [ "$gemset" != "" ] && gemset="@$gemset"
-  local version=$(echo $MY_RUBY_HOME | awk -F'-' '{print $2}')
-  [ "$version" == "1.8.7" ] && version=""
-  local full="$version$gemset"
-  [ "$full" != "" ] && echo " [$full]"
-}
-
-function parse_git_dirty {
-  git diff --quiet || echo "*"
-}
-
-function parse_git_branch {
-  ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-  echo " ("${ref#refs/heads/}"$(parse_git_dirty))" 
+function tmux_colors {
+  for i in {0..255} ; do
+    printf "\x1b[38;5;${i}mcolour${i}\n"
+  done
 }
 
 # load ssh-agent
