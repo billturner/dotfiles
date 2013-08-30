@@ -1,10 +1,8 @@
 # ENV variables
-# export GEM_HOME="/Library/Ruby/Gems/1.8"
-# export GEM_PATH="/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/gems/1.8"
 export GEM_EDITOR="vim"
 export PATH="/usr/local/bin:/usr/local/share/npm/bin:/Developer/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
 export LC_CTYPE=en_US.UTF-8
-export EDITOR=mvim
+export EDITOR=vim
 export EVENT_NOKQUEUE=1
 export HISTCONTROL=erasedups
 export ARCHFLAGS='-arch x86_64'
@@ -26,7 +24,6 @@ alias m="mvim"
 alias mbash="vim ~/.bashrc"
 alias rbash="source ~/.bashrc"
 alias rmds="find . -name *.DS_Store -type f -exec rm {} \;"
-alias vim="mvim -v"
 
 # tmux aliases
 alias tmux="tmux -2"
@@ -37,9 +34,7 @@ alias tmat="tmux attach-session -t"
 
 # git aliases
 alias gs="git status"
-alias gdiff="git diff | mate -"
 alias gnew="git ls-files -o --exclude-standard | xargs git add"
-alias gitrb="git rebase --continue"
 
 # git flow aliases
 alias gffs="git flow feature start"
@@ -47,30 +42,16 @@ alias gfff="git flow feature finish"
 alias gffr="git flow feature rebase"
 
 # rails 3 aliases
-alias r="rails"
-alias rg="rails generate"
-alias rc="rails console"
-alias rs="rails server"
 alias be="bundle exec"
+alias r="be rails"
+alias rg="be rails g"
+alias rc="be rails c"
+alias rs="be rails s"
 alias brake="bundle exec rake"
 alias brr="brake routes"
-alias ss="script/server"
-alias sc="script/console"
-alias sg="script/generate"
-alias rr="rake routes"
-
-# testing aliases
-alias rrtest="ruby -Itest"
-alias rrspec="ruby -Ispec"
-
-# rvm
-alias rsys="rvm use system"
-alias wr="which ruby"
-alias rvminit="gem install bundler"
 
 # various aliases
 alias pubkey="cat ~/.ssh/id_dsa.pub | pbcopy"
-alias vim="/Applications/MacVim.app/Contents/MacOS/vim"
 
 # functions
 dontindex () {
@@ -108,8 +89,8 @@ function tmuxwork {
 
       tmux send-keys -t work:1 "vim" C-m
       tmux send-keys -t work:2 "rails server" C-m
-      tmux send-keys -t work:3 "tail -f log/test.log" C-m
-      tmux select-window -t work:1
+    #  tmux send-keys -t work:3 "tail -f log/test.log" C-m
+      tmux select-window -t work:1.0
     fi
   fi
   tmux attach-session -d -t work
@@ -163,15 +144,12 @@ function tmuxsplit {
 # load ssh-agent
 source ~/.ssh/agent.sh
 
-# setup rvm
-# [[ -s "/Users/billturner/.rvm/scripts/rvm" ]] && source "/Users/billturner/.rvm/scripts/rvm"
-
-# PS1='\u@\h:\w$(_rvm_ruby_version)$(parse_git_branch)$ '
-# source "$rvm_path/contrib/ps1_functions"
-# ps1_set
-
-
-# PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# prompt stuff
+# * color tips from: http://blog.sanctum.geek.nz/bash-prompts/
+COLOR_RED='\[\e[0;2;31m\]'
+COLOR_GREEN='\[\e[32m\]'
+COLOR_BLUE='\[\e[34m\]'
+COLOR_RESET='\[\e[0m\]'
 
 # git branch
 function _git_branch {
@@ -180,12 +158,11 @@ function _git_branch {
 
 function _ruby_version {
   if (which ruby | grep -q ruby); then
-    ruby -v | cut -d ' ' -f2
+    ruby -v | cut -d" " -f2
   fi
 }
 
-# prompt
-PS1='\u@\h:\w $(_ruby_version)$(_git_branch)$ '
+export PS1="\u@\h:\w $COLOR_RED\$(_ruby_version)$COLOR_RESET$COLOR_BLUE\$(_git_branch)$COLOR_RESET$ "
 
 # include a personal rc file if found
 if [ -f ~/.personalrc ]; then source ~/.personalrc ; fi

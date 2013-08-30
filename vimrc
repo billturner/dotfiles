@@ -161,6 +161,8 @@ nmap <Leader>] :TagbarToggle<CR>
 " ack.vim
 nnoremap <leader>a :Ack<Space>
 
+" vim-gitgutter
+let g:gitgutter_realtime = 0
 " fix vim-gitgutter column color
 highlight clear SignColumn
 

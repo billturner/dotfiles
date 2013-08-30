@@ -6,6 +6,8 @@
 	ci = commit
 	co = checkout
 	br = branch
+	workprofile = config user.email \"bturner@cloudpassage.com\"
+	personalprofile = config user.email \"hello@billturner.me\"
 [color]
 	branch = auto
 	status = auto
