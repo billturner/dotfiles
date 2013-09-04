@@ -40,8 +40,8 @@ set softtabstop=2
 set expandtab
 
 " statusline
+set laststatus=2
 if has("statusline")
-  set laststatus=2
   set statusline=""
   set statusline+=%n:%f
   set statusline+=\ %m
@@ -151,12 +151,9 @@ let g:rubytest_in_quickfix = 0
 let g:rubytest_cmd_test = "ruby %p"
 let g:rubytest_cmd_testcase = "ruby %p -n '/%c/'"
 
-" TagBar
-let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
-let g:tagbar_width = 30
+" tag stuff
 nmap <Leader>rt :!ctags --exclude=tmp --exclude=coverage --exclude=.git --exclude=log --extra=+f -R *<CR><CR>
 nmap <C-\> :tnext<CR>
-nmap <Leader>] :TagbarToggle<CR>
 
 " ack.vim
 nnoremap <leader>a :Ack<Space>
@@ -165,6 +162,16 @@ nnoremap <leader>a :Ack<Space>
 let g:gitgutter_realtime = 0
 " fix vim-gitgutter column color
 highlight clear SignColumn
+
+" vim-airline
+let g:airline_powerline_fonts = 0
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_detect_modified = 0
+let g:airline_detect_whitespace = 0
+let g:airline_symbols = {}
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
 
 " rubyblock:
 runtime macros/matchit.vim
