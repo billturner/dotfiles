@@ -16,10 +16,11 @@ let mapleader=","
 if &t_Co >= 256 || has("gui_running")
   set background=dark
   " solarized options
-  let g:solarized_termcolors=256
-  let g:solarized_visibility="normal"
-  let g:solarized_contrast="normal"
+  " let g:solarized_termcolors=256
+  " let g:solarized_visibility="normal"
+  " let g:solarized_contrast="normal"
   colorscheme solarized
+  " colorscheme base16-default
 endif
 
 " filetype/encoding
@@ -175,6 +176,10 @@ let g:airline_symbols.branch = "⎇"
 let g:airline_symbols.paste = "ρ"
 let g:airline_section_c = "%m %f"
 let g:airline_theme = "solarized"
+
+" go lang stuff
+au FileType go au BufWritePre <buffer> Fmt
+autocmd FileType go setlocal noexpandtab shiftwidth=2 tabstop=2 softtabstop=2 nolist
 
 " rubyblock:
 runtime macros/matchit.vim

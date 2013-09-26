@@ -1,6 +1,7 @@
 # ENV variables
 export GEM_EDITOR="vim"
-export PATH="/usr/local/bin:/usr/local/share/npm/bin:/Developer/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:/usr/local/mysql/bin:$PATH"
+export GOROOT="/usr/local/opt/go"
+export PATH="/usr/local/bin:/usr/local/share/npm/bin:/Developer/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:/usr/local/mysql/bin:$GOROOT/bin:$PATH"
 export LC_CTYPE=en_US.UTF-8
 export EDITOR=vim
 export EVENT_NOKQUEUE=1
@@ -77,10 +78,10 @@ function tmuxwork {
     if [ "$SIZE" == "wide" ]; then
       tmux split-window -t work:1.0 -h
       tmux send-keys -t work:1.0 "vim" C-m
-      tmux new-window -t work:2 -n "server/test log"
+      tmux new-window -t work:2 -n "server/log"
       tmux split-window -t work:2.0 -h
-      tmux send-keys -t work:2.0 "rs" C-m
-      tmux send-keys -t work:2.1 "tail -f log/test.log" C-m
+      tmux send-keys -t work:2.0 "bundle exec rails s" C-m
+      # tmux send-keys -t work:2.1 "tail -f log/test.log" C-m
       tmux select-pane -t work:1.0
     else
       tmux new-window -t work:2 -n "server"
@@ -88,7 +89,7 @@ function tmuxwork {
       tmux new-window -t work:4 -n "shell"
 
       tmux send-keys -t work:1 "vim" C-m
-      tmux send-keys -t work:2 "rails server" C-m
+      tmux send-keys -t work:2 "bundle exec rails s" C-m
     #  tmux send-keys -t work:3 "tail -f log/test.log" C-m
       tmux select-window -t work:1.0
     fi
