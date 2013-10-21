@@ -1,6 +1,6 @@
 # ENV variables
 export GEM_EDITOR="vim"
-export GOROOT="/usr/local/opt/go"
+export GOROOT="~/dev/go"
 export PATH="/usr/local/bin:/usr/local/share/npm/bin:/Developer/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:/usr/local/mysql/bin:$GOROOT/bin:$PATH"
 export LC_CTYPE=en_US.UTF-8
 export EDITOR=vim

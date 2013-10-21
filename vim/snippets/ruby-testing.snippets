@@ -14,7 +14,7 @@ snippet it
 		${2}
 	end
 snippet before
-	before :each do
+	before do
 		${1}
 	end
 snippet after
@@ -23,8 +23,12 @@ snippet after
 	end
 snippet skip
 	skip "${1:reason}"
+snippet pending
+	pending "${1:reason}"
 snippet let
-	let (:${1}) { ${2} }
+	let(:${1}) {
+		${2}
+	}
 snippet subject
 	subject { ${1} }
 snippet expect

@@ -19,8 +19,8 @@ if &t_Co >= 256 || has("gui_running")
   " let g:solarized_termcolors=256
   " let g:solarized_visibility="normal"
   " let g:solarized_contrast="normal"
-  colorscheme solarized
-  " colorscheme base16-default
+  " colorscheme solarized
+  colorscheme base16-default
 endif
 
 " filetype/encoding
@@ -134,7 +134,7 @@ let g:NERDSpaceDelims=1
 " Nerdtree
 map <leader>n :NERDTreeToggle<CR>
 
-let g:NERDTreeWinPos="right"
+let g:NERDTreeWinPos="left"
 let NERDTreeShowHidden=1
 let NERDTreeMinimalUI=1
 au Filetype nerdtree setlocal nolist
@@ -153,7 +153,7 @@ let g:rubytest_cmd_test = "ruby %p"
 let g:rubytest_cmd_testcase = "ruby %p -n '/%c/'"
 
 " tag stuff
-nmap <Leader>rt :!ctags --exclude=tmp --exclude=coverage --exclude=.git --exclude=log --extra=+f -R *<CR><CR>
+nmap <Leader>R :!ctags --exclude=tmp --exclude=tags --exclude=coverage --exclude=.git --exclude=log --extra=+f -R *<CR><CR>
 nmap <C-\> :tnext<CR>
 
 " ack.vim
@@ -161,6 +161,7 @@ nnoremap <leader>a :Ack<Space>
 
 " vim-gitgutter
 let g:gitgutter_realtime = 0
+let g:gitgutter_eager = 0
 " fix vim-gitgutter column color
 highlight clear SignColumn
 
@@ -175,11 +176,14 @@ let g:airline_symbols = {}
 let g:airline_symbols.branch = "⎇"
 let g:airline_symbols.paste = "ρ"
 let g:airline_section_c = "%m %f"
-let g:airline_theme = "solarized"
+let g:airline_theme = "base16"
 
 " go lang stuff
 au FileType go au BufWritePre <buffer> Fmt
 autocmd FileType go setlocal noexpandtab shiftwidth=2 tabstop=2 softtabstop=2 nolist
+
+" tagbar
+nnoremap <leader>r :TagbarToggle<CR>
 
 " rubyblock:
 runtime macros/matchit.vim
