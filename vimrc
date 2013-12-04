@@ -151,13 +151,25 @@ nmap <Leader>Y <Plug>RubyFileRun
 let g:rubytest_in_quickfix = 0
 let g:rubytest_cmd_test = "ruby %p"
 let g:rubytest_cmd_testcase = "ruby %p -n '/%c/'"
+let g:rubytest_cmd_spec = "bundle exec rspec '%p'"
+let g:rubytest_cmd_example = "bundle exec rspec '%p' -l '%c'"
 
 " tag stuff
 nmap <Leader>R :!ctags --exclude=tmp --exclude=tags --exclude=coverage --exclude=.git --exclude=log --extra=+f -R *<CR><CR>
 nmap <C-\> :tnext<CR>
 
-" ack.vim
-nnoremap <leader>a :Ack<Space>
+" Silver Searcher
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+  let g:ctrlp_use_caching=0
+  nnoremap <leader>a :Ag<Space>
+  " bind K to grep word under cursor
+  nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+else
+  " ack.vim
+  nnoremap <leader>a :Ack<Space>
+endif
 
 " vim-gitgutter
 let g:gitgutter_realtime = 0

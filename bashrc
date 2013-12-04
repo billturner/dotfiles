@@ -1,15 +1,21 @@
 # ENV variables
 export GEM_EDITOR="vim"
-export GOROOT="~/dev/go"
-export PATH="/usr/local/bin:/usr/local/share/npm/bin:/Developer/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:/usr/local/mysql/bin:$GOROOT/bin:$PATH"
+export GOROOT="~/code/go"
+export PATH="/usr/local/bin:/usr/local/share/npm/bin:/Developer/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:$GOROOT/bin:$PATH"
 export LC_CTYPE=en_US.UTF-8
 export EDITOR=vim
 export EVENT_NOKQUEUE=1
 export HISTCONTROL=erasedups
 export ARCHFLAGS='-arch x86_64'
 export AUTOFEATURE=true
-# export RUBYOPT="rubygems"
 export TERM="screen-256color"
+
+# ruby GC tunings
+export RUBY_GC_MALLOC_LIMIT=1000000000
+export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1.25
+export RUBY_HEAP_MIN_SLOTS=800000
+export RUBY_FREE_MIN=600000
+export LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so
 
 shopt -s histappend
 
@@ -54,6 +60,9 @@ alias brr="brake routes"
 # various aliases
 alias pubkey="cat ~/.ssh/id_dsa.pub | pbcopy"
 
+# for fat fingers
+alias bim="vim"
+
 # functions
 dontindex () {
   touch $1/.metadata_never_index;
@@ -68,7 +77,7 @@ function tmux_colors {
 
 # tmux setups
 function tmuxwork {
-  cd ~/dev/work
+  cd ~/code/work
 
   SIZE=${1:-normal}
 
@@ -80,7 +89,7 @@ function tmuxwork {
       tmux send-keys -t work:1.0 "vim" C-m
       tmux new-window -t work:2 -n "server/log"
       tmux split-window -t work:2.0 -h
-      tmux send-keys -t work:2.0 "bundle exec rails s" C-m
+      # tmux send-keys -t work:2.0 "bundle exec rails s" C-m
       # tmux send-keys -t work:2.1 "tail -f log/test.log" C-m
       tmux select-pane -t work:1.0
     else
@@ -89,8 +98,8 @@ function tmuxwork {
       tmux new-window -t work:4 -n "shell"
 
       tmux send-keys -t work:1 "vim" C-m
-      tmux send-keys -t work:2 "bundle exec rails s" C-m
-    #  tmux send-keys -t work:3 "tail -f log/test.log" C-m
+      # tmux send-keys -t work:2 "bundle exec rails s" C-m
+      # tmux send-keys -t work:3 "tail -f log/test.log" C-m
       tmux select-window -t work:1.0
     fi
   fi

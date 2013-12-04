@@ -34,15 +34,15 @@ namespace :install do
     task :mac do
       if system %Q{ which brew }
         puts "Installing ack and ctags"
-        system %Q{ brew install ack ctags }
+        system %Q{ brew install ack ctags the_silver_searcher }
       else
         puts "Install homebrew first"
       end
     end
     desc "Install the helper applications (via apt-get)"
     task :ubuntu do
-      puts "Installing ctags"
-      system %Q{ sudo apt-get install ctags }
+      puts "Installing ctags and silver searcher"
+      system %Q{ sudo apt-get install ctags silversearcher-ag }
       puts "Installing ack-grep (and adding symlink to ack)"
       system %Q{ sudo apt-get install ack-grep }
       system %Q{ sudo dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep }
@@ -58,7 +58,7 @@ namespace :install do
 
   desc 'Add all symlinks'
   task :symlinks do
-    %w{gitignore gitconfig vimrc gvimrc ackrc ctags irbrc gemrc bash_profile bashrc tmux.conf vim}.each do |sym|
+    %w{gitignore gitconfig vimrc gvimrc ackrc ctags irbrc gemrc bash_profile bashrc tmux.conf psqlrc vim}.each do |sym|
       # first, move existing files and directories to NAME.old
       if File.symlink?("#{HOME_DIR}/.#{sym}")
         puts "Removing old symlink for .#{sym}"
