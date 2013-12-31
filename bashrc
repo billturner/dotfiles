@@ -1,7 +1,7 @@
 # ENV variables
 export GEM_EDITOR="vim"
 export GOROOT="~/code/go"
-export PATH="/usr/local/bin:/usr/local/dse/bin:/usr/local/share/npm/bin:/Developer/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:$GOROOT/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/dse/bin:/usr/local/heroku/bin:/usr/local/share/npm/bin:/Developer/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:$GOROOT/bin:$PATH"
 export LC_CTYPE=en_US.UTF-8
 export EDITOR=vim
 export EVENT_NOKQUEUE=1
@@ -181,6 +181,3 @@ export PS1="\u@\h:\w $COLOR_RED\$(_ruby_version)$COLOR_RESET$COLOR_BLUE\$(_git_b
 
 # include a personal rc file if found
 if [ -f ~/.personalrc ]; then source ~/.personalrc ; fi
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
