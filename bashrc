@@ -1,7 +1,7 @@
 # ENV variables
 export GEM_EDITOR="vim"
 export GOROOT="~/code/go"
-export PATH="/usr/local/bin:/usr/local/share/npm/bin:/Developer/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:$GOROOT/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/dse/bin:/usr/local/share/npm/bin:/Developer/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:$GOROOT/bin:$PATH"
 export LC_CTYPE=en_US.UTF-8
 export EDITOR=vim
 export EVENT_NOKQUEUE=1
@@ -9,13 +9,6 @@ export HISTCONTROL=erasedups
 export ARCHFLAGS='-arch x86_64'
 export AUTOFEATURE=true
 export TERM="screen-256color"
-
-# ruby GC tunings
-export RUBY_GC_MALLOC_LIMIT=1000000000
-export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1.25
-export RUBY_HEAP_MIN_SLOTS=800000
-export RUBY_FREE_MIN=600000
-export LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so
 
 shopt -s histappend
 
@@ -64,6 +57,18 @@ alias pubkey="cat ~/.ssh/id_dsa.pub | pbcopy"
 alias bim="vim"
 
 # functions
+function cassandra {
+  ACTION=${1:-start}
+
+  if [ "$ACTION" == "stop" ]; then
+    echo "Stopping Cassandra..."
+    dse cassandra-stop
+  else
+    echo "Starting Cassandra..."
+    dse cassandra -s
+  fi
+}
+
 dontindex () {
   touch $1/.metadata_never_index;
   sudo mdutil -E $1;
@@ -176,3 +181,6 @@ export PS1="\u@\h:\w $COLOR_RED\$(_ruby_version)$COLOR_RESET$COLOR_BLUE\$(_git_b
 
 # include a personal rc file if found
 if [ -f ~/.personalrc ]; then source ~/.personalrc ; fi
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
