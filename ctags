@@ -1,10 +1,12 @@
 --recurse=yes
 --tag-relative=yes
---exclude="\.svn"
---exclude="\.git"
---exclude="\.sass-cache"
---exclude="coverage"
---exclude="tmp"
+--exclude=.svn
+--exclude=.git
+--exclude=.sass-cache
+--exclude=coverage
+--exclude=vendor
+--exclude=public/assets
+--exclude=tmp
 
 --langdef=css
 --langmap=css:.css

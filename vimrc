@@ -154,10 +154,6 @@ let g:rubytest_cmd_testcase = "ruby %p -n '/%c/'"
 let g:rubytest_cmd_spec = "bundle exec rspec '%p'"
 let g:rubytest_cmd_example = "bundle exec rspec '%p' -l '%c'"
 
-" tag stuff
-nmap <Leader>R :!ctags --exclude=tmp --exclude=tags --exclude=coverage --exclude=.git --exclude=log --extra=+f -R *<CR><CR>
-nmap <C-\> :tnext<CR>
-
 " Silver Searcher
 if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
@@ -194,8 +190,13 @@ let g:airline_theme = "base16"
 au FileType go au BufWritePre <buffer> Fmt
 autocmd FileType go setlocal noexpandtab shiftwidth=2 tabstop=2 softtabstop=2 nolist
 
-" tagbar
+" tagbar & tags related
 nnoremap <leader>r :TagbarToggle<CR>
+nmap <Leader>R :!ctags --exclude=tmp --exclude=tags --exclude=coverage --exclude=.git --exclude=log --extra=+f -R *<CR><CR>
+nmap <C-\> :tnext<CR>
 
-" rubyblock:
+" vim-mustache-handlebars
+let g:mustache_abbreviations = 1
+
+" use matchit
 runtime macros/matchit.vim

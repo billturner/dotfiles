@@ -20,7 +20,6 @@ alias poststop="launchctl unload -w ~/Library/LaunchAgents/org.postgresql.postgr
 
 # helper aliases
 alias ls="ls -laGF"
-alias m="mvim"
 alias mbash="vim ~/.bashrc"
 alias rbash="source ~/.bashrc"
 alias rmds="find . -name *.DS_Store -type f -exec rm {} \;"
