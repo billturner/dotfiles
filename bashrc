@@ -51,6 +51,7 @@ alias brr="brake routes"
 
 # various aliases
 alias pubkey="cat ~/.ssh/id_dsa.pub | pbcopy"
+alias pyhttp="python -m SimpleHTTPServer"
 
 # for fat fingers
 alias bim="vim"

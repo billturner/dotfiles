@@ -5,6 +5,8 @@ personalrc
 bootstrap.rake
 .ruby-version
 .ruby-gemset
+.env
+.env.test
 
 # for node
 lib-cov

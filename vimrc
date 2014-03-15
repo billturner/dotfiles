@@ -186,10 +186,6 @@ let g:airline_symbols.paste = "ρ"
 let g:airline_section_c = "%m %f"
 let g:airline_theme = "base16"
 
-" go lang stuff
-au FileType go au BufWritePre <buffer> Fmt
-autocmd FileType go setlocal noexpandtab shiftwidth=2 tabstop=2 softtabstop=2 nolist
-
 " tagbar & tags related
 nnoremap <leader>r :TagbarToggle<CR>
 nmap <Leader>R :!ctags --exclude=tmp --exclude=tags --exclude=coverage --exclude=.git --exclude=log --extra=+f -R *<CR><CR>
