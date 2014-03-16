@@ -1,7 +1,6 @@
 # ENV variables
 export GEM_EDITOR="vim"
-export GOROOT="~/code/go"
-export PATH="/usr/local/bin:/usr/local/dse/bin:/usr/local/heroku/bin:/usr/local/share/npm/bin:/Developer/usr/bin:/usr/local/pgsql/bin:/usr/local/sbin:$GOROOT/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/heroku/bin:/usr/local/share/npm/bin:/usr/local/pgsql/bin:/usr/local/sbin:$PATH"
 export LC_CTYPE=en_US.UTF-8
 export EDITOR=vim
 export EVENT_NOKQUEUE=1
@@ -13,10 +12,8 @@ export TERM="screen-256color"
 shopt -s histappend
 
 # db / service aliases
-alias mystart="launchctl load -w ~/Library/LaunchAgents/com.mysql.mysqld.plist"
-alias mystop="launchctl unload -w ~/Library/LaunchAgents/com.mysql.mysqld.plist"
-alias poststart="launchctl load -w ~/Library/LaunchAgents/org.postgresql.postgres.plist"
-alias poststop="launchctl unload -w ~/Library/LaunchAgents/org.postgresql.postgres.plist"
+alias poststart="launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+alias poststop="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 
 # helper aliases
 alias ls="ls -laGF"
@@ -57,17 +54,6 @@ alias pyhttp="python -m SimpleHTTPServer"
 alias bim="vim"
 
 # functions
-function cassandra {
-  ACTION=${1:-start}
-
-  if [ "$ACTION" == "stop" ]; then
-    echo "Stopping Cassandra..."
-    dse cassandra-stop
-  else
-    echo "Starting Cassandra..."
-    dse cassandra -s
-  fi
-}
 
 dontindex () {
   touch $1/.metadata_never_index;
@@ -81,36 +67,6 @@ function tmux_colors {
 }
 
 # tmux setups
-function tmuxwork {
-  cd ~/code/work
-
-  SIZE=${1:-normal}
-
-  tmux has-session -t work 2>/dev/null
-  if [ $? != 0 ]; then
-    tmux new-session -d -s work -n "edit"
-    if [ "$SIZE" == "wide" ]; then
-      tmux split-window -t work:1.0 -h
-      tmux send-keys -t work:1.0 "vim" C-m
-      tmux new-window -t work:2 -n "server/log"
-      tmux split-window -t work:2.0 -h
-      # tmux send-keys -t work:2.0 "bundle exec rails s" C-m
-      # tmux send-keys -t work:2.1 "tail -f log/test.log" C-m
-      tmux select-pane -t work:1.0
-    else
-      tmux new-window -t work:2 -n "server"
-      tmux new-window -t work:3 -n "test log"
-      tmux new-window -t work:4 -n "shell"
-
-      tmux send-keys -t work:1 "vim" C-m
-      # tmux send-keys -t work:2 "bundle exec rails s" C-m
-      # tmux send-keys -t work:3 "tail -f log/test.log" C-m
-      tmux select-window -t work:1.0
-    fi
-  fi
-  tmux attach-session -d -t work
-}
-
 function tmuxvert {
   DIR="${1:?Directory not provided}"
   NAME="${2:-editing}"
@@ -156,9 +112,6 @@ function tmuxsplit {
   fi
 }
 
-# load ssh-agent
-source ~/.ssh/agent.sh
-
 # prompt stuff
 # * color tips from: http://blog.sanctum.geek.nz/bash-prompts/
 COLOR_RED='\[\e[0;2;31m\]'
@@ -179,5 +132,9 @@ function _ruby_version {
 
 export PS1="\u@\h:\w $COLOR_RED\$(_ruby_version)$COLOR_RESET$COLOR_BLUE\$(_git_branch)$COLOR_RESET$ "
 
-# include a personal rc file if found
-if [ -f ~/.personalrc ]; then source ~/.personalrc ; fi
+# load ssh-agent
+if [ -f ~/.ssh/agent.sh ]; then source ~/.ssh/agent.sh ; fi
+
+# include a personal and work rc files if found
+if [ -f ~/.personal.bashrc ]; then source ~/.personalrc ; fi
+if [ -f ~/.work.bashrc ]; then source ~/.work.bashrc ; fi
