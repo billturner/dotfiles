@@ -136,5 +136,5 @@ export PS1="\u@\h:\w $COLOR_RED\$(_ruby_version)$COLOR_RESET$COLOR_BLUE\$(_git_b
 if [ -f ~/.ssh/agent.sh ]; then source ~/.ssh/agent.sh ; fi
 
 # include a personal and work rc files if found
-if [ -f ~/.personal.bashrc ]; then source ~/.personalrc ; fi
+if [ -f ~/.personal.bashrc ]; then source ~/.personal.bashrc ; fi
 if [ -f ~/.work.bashrc ]; then source ~/.work.bashrc ; fi
