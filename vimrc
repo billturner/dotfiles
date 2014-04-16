@@ -134,6 +134,7 @@ let g:NERDSpaceDelims=1
 
 " Nerdtree
 map <leader>n :NERDTreeToggle<CR>
+map <leader>f :NERDTreeFind<CR>
 
 let g:NERDTreeWinPos="left"
 let NERDTreeShowHidden=1
