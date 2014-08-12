@@ -1,6 +1,6 @@
 # ENV variables
 export GEM_EDITOR="vim"
-export PATH="/usr/local/bin:/usr/local/heroku/bin:/usr/local/share/npm/bin:/usr/local/pgsql/bin:/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/php55/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/local/share/npm/bin:/usr/local/pgsql/bin:/usr/local/sbin:$PATH"
 export LC_CTYPE=en_US.UTF-8
 export EDITOR=vim
 export EVENT_NOKQUEUE=1
@@ -14,12 +14,18 @@ shopt -s histappend
 # db / service aliases
 alias poststart="launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
 alias poststop="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist"
+alias mystart="mysql.server start"
+alias mystop="mysql.server stop"
+alias nginx.start='sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
+alias nginx.stop='sudo launchctl unload /Library/LaunchDaemons/homebrew.mxcl.nginx.plist'
+alias nginx.restart='nginx.stop && nginx.start'
 
 # helper aliases
 alias ls="ls -laGF"
 alias mbash="vim ~/.bashrc"
 alias rbash="source ~/.bashrc"
 alias rmds="find . -name *.DS_Store -type f -exec rm {} \;"
+alias npm-exec='PATH=$(npm bin):$PATH'
 
 # tmux aliases
 alias tmux="tmux -2"
