@@ -28,11 +28,9 @@ alias rmds="find . -name *.DS_Store -type f -exec rm {} \;"
 alias npm-exec='PATH=$(npm bin):$PATH'
 
 # tmux aliases
-alias tmux="tmux -2"
-alias tmkill="tmux kill-session -t"
-alias tmls="tmux ls"
-alias tmnew="tmux new -s"
-alias tmat="tmux attach-session -t"
+alias tmk="tmux kill-session -t"
+alias tml="tmux ls"
+alias tma="tmux attach -t"
 
 # git aliases
 alias gs="git status"
@@ -43,7 +41,7 @@ alias gffs="git flow feature start"
 alias gfff="git flow feature finish"
 alias gffr="git flow feature rebase"
 
-# rails 3 aliases
+# rails 3/4 aliases
 alias be="bundle exec"
 alias r="be rails"
 alias rg="be rails g"
@@ -60,7 +58,6 @@ alias pyhttp="python -m SimpleHTTPServer"
 alias bim="vim"
 
 # functions
-
 dontindex () {
   touch $1/.metadata_never_index;
   sudo mdutil -E $1;
@@ -143,6 +140,9 @@ if [ -f ~/.ssh/agent.sh ]; then source ~/.ssh/agent.sh ; fi
 
 # load bash-completion
 # if [ -f /usr/local/etc/bash_completion ]; then source /usr/local/etc/bash_completion ; fi
+
+# load tmuxinator helpers
+if [ -f ~/.bin/tmuxinator.bash ]; then source ~/.bin/tmuxinator.bash ; fi
 
 # include a personal and work rc files if found
 if [ -f ~/.personal.bashrc ]; then source ~/.personal.bashrc ; fi
