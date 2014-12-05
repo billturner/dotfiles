@@ -10,9 +10,6 @@
 [submodule "vim/bundle/vim-rails"]
 	path = vim/bundle/vim-rails
 	url = https://github.com/tpope/vim-rails.git
-[submodule "vim/bundle/vim-rubytest"]
-	path = vim/bundle/vim-rubytest
-	url = https://github.com/janx/vim-rubytest.git
 [submodule "vim/bundle/vim-endwise"]
 	path = vim/bundle/vim-endwise
 	url = https://github.com/tpope/vim-endwise.git
@@ -70,3 +67,6 @@
 [submodule "vim/bundle/jshint2.vim"]
 	path = vim/bundle/jshint2.vim
 	url = https://github.com/Shutnik/jshint2.vim.git
+[submodule "vim/bundle/vim-vroom"]
+	path = vim/bundle/vim-vroom
+	url = https://github.com/skalnik/vim-vroom.git
