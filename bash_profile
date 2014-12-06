@@ -2,7 +2,7 @@
 if [ -f /usr/local/share/chruby/chruby.sh ]; then
   source /usr/local/share/chruby/chruby.sh
   RUBIES=(~/.rubies/*)
-  chruby 2.1.2
+  chruby 2.1.5
   source /usr/local/share/chruby/auto.sh
 fi
 
