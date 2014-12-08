@@ -151,8 +151,8 @@ nmap <Leader>y <Plug>RubyTestRun
 nmap <Leader>Y <Plug>RubyFileRun
 
 let g:rubytest_in_quickfix = 0
-let g:rubytest_cmd_test = "ruby %p"
-let g:rubytest_cmd_testcase = "ruby %p -n '/%c/'"
+let g:rubytest_cmd_test = "bundle exec spring testunit %p"
+let g:rubytest_cmd_testcase = "bundle exec spring testunit %p -n '/%c/'"
 let g:rubytest_cmd_spec = "bundle exec rspec '%p'"
 let g:rubytest_cmd_example = "bundle exec rspec '%p' -l '%c'"
 
