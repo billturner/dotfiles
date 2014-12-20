@@ -58,11 +58,6 @@ alias pyhttp="python -m SimpleHTTPServer"
 alias bim="vim"
 
 # functions
-dontindex () {
-  touch $1/.metadata_never_index;
-  sudo mdutil -E $1;
-}
-
 function tmux_colors {
   for i in {0..255} ; do
     printf "\x1b[38;5;${i}mcolour${i}\n"

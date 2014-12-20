@@ -194,8 +194,5 @@ nnoremap <leader>r :TagbarToggle<CR>
 nmap <Leader>R :!ctags --exclude=tmp --exclude=tags --exclude=coverage --exclude=.git --exclude=log --extra=+f -R *<CR><CR>
 nmap <C-\> :tnext<CR>
 
-" vim-mustache-handlebars
-let g:mustache_abbreviations = 1
-
 " use matchit
 runtime macros/matchit.vim
