@@ -53,6 +53,12 @@ snippet scenario
 	scenario "${1}" do
 		${2}
 	end
+snippet within
+	within "${1}" do
+		${2}
+	end
+snippet fill
+	fill_in "${1}", with: ${2}
 
 # minitest
 snippet test
