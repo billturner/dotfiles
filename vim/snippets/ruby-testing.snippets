@@ -3,14 +3,17 @@ snippet context
 	context "${1:context}" do
 		${2}
 	end
-
 # rspec
 snippet describe
-	describe ${1:statement} do
+	describe "${1:statement}" do
 		${2}
 	end
 snippet it
 	it "${1:context}" do
+		${2}
+	end
+snippet should
+	should "${1}" do
 		${2}
 	end
 snippet before
@@ -57,7 +60,7 @@ snippet within
 	within "${1}" do
 		${2}
 	end
-snippet fill
+snippet fill_in
 	fill_in "${1}", with: ${2}
 
 # minitest
@@ -65,7 +68,11 @@ snippet test
 	test "${1}" do
 		${2}
 	end
-snippet dset
+snippet setup
 	def setup
+		${1}
+	end
+snippet teardown
+	def teardown
 		${1}
 	end
