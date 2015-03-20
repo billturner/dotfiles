@@ -123,7 +123,7 @@ endif
 nnoremap <Leader>t :CtrlP<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
 
-let g:ctrlp_custom_ignore = '_site\|bundle\|tmp\|coverage'
+let g:ctrlp_custom_ignore = '_site\|bundle\|tmp\|coverage\|vendor\|node_modules'
 let g:ctrlp_clear_cache_on_exit=1
 let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode='r'

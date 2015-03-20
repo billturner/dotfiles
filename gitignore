@@ -3,6 +3,7 @@ tags
 personalrc
 .watchr
 bootstrap.rake
+config/application.yml
 .ruby-version
 .ruby-gemset
 .env
