@@ -1,10 +1,12 @@
---ignore-dir=vendor
 --ignore-dir=log
 --ignore-dir=tmp
 --ignore-dir=doc
 --ignore-dir=coverage
 --ignore-dir=compiled
 --ignore-dir=gems
+--ignore-dir=build
+--ignore-dir=node_modules
+--ignore-dir=vendor
 --type-set=coffee=.coffee
 --type-add=ruby=.ru
 --type-add=ruby=.rake
