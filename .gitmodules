@@ -58,3 +58,9 @@
 [submodule "vim/bundle/flatland.vim"]
 	path = vim/bundle/flatland.vim
 	url = https://github.com/vivkin/flatland.vim.git
+[submodule "vim/bundle/vim-javascript"]
+	path = vim/bundle/vim-javascript
+	url = https://github.com/jelera/vim-javascript-syntax.git
+[submodule "vim/bundle/vim-javascript-pangloss"]
+	path = vim/bundle/vim-javascript-pangloss
+	url = https://github.com/pangloss/vim-javascript.git
