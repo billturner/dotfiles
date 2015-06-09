@@ -1,5 +1,7 @@
 .rvmrc
 tags
+.tags
+.tags_sorted_by_file
 personalrc
 .watchr
 bootstrap.rake

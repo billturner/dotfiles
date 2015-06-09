@@ -156,19 +156,12 @@ let g:rubytest_cmd_testcase = "bundle exec spring testunit %p -n '/%c/'"
 let g:rubytest_cmd_spec = "bundle exec rspec '%p'"
 let g:rubytest_cmd_example = "bundle exec rspec '%p' -l '%c'"
 
-" Silver Searcher
+" Ack/Silver Searcher
 if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  " let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-  " let g:ctrlp_use_caching=0
-  nnoremap <leader>a :Ag<Space>
-  nnoremap <Leader>A :Ag "<C-r><C-w>"<CR>
-  " bind K to grep word under cursor
-  " nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-else
-  " ack.vim
-  nnoremap <leader>a :Ack<Space>
+  let g:ackprg = 'ag --nocolor --nogroup'
 endif
+nnoremap <leader>a :Ack<Space>
+nnoremap <Leader>A :Ack "<C-r><C-w>"<CR>
 
 " vim-gitgutter
 let g:gitgutter_realtime = 0
