@@ -15,13 +15,7 @@ let mapleader=","
 " colorscheme
 if &t_Co >= 256 || has("gui_running")
   set background=dark
-  " solarized options
-  " let g:solarized_visibility="normal"
-  " let g:solarized_contrast="normal"
-  " colorscheme solarized
-  " colorscheme base16-default
   colorscheme lucius
-  " colorscheme seoul256
 endif
 
 " filetype/encoding
