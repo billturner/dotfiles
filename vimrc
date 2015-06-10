@@ -131,8 +131,9 @@ map <leader>n :NERDTreeToggle<CR>
 map <leader>f :NERDTreeFind<CR>
 
 let g:NERDTreeWinPos="left"
-let NERDTreeShowHidden=1
-let NERDTreeMinimalUI=1
+let g:NERDTreeShowHidden=1
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeWinSize=40
 au Filetype nerdtree setlocal nolist
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
