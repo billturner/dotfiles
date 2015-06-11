@@ -15,7 +15,7 @@ let mapleader=","
 " colorscheme
 if &t_Co >= 256 || has("gui_running")
   set background=dark
-  # iTerm2 theme base16-tomorrow.dark (16)
+  " iTerm2 theme base16-tomorrow.dark (16)
   colorscheme base16-tomorrow
 endif
 
