@@ -33,7 +33,7 @@ namespace :install do
     desc "Install the helper applications (via Homebrew)"
     task :mac do
       if system %Q{ which brew }
-        puts "Installing ack and ctags"
+        puts "Installing ack, the_silver_searcher, and ctags"
         system %Q{ brew install ack ctags the_silver_searcher }
       else
         puts "Install homebrew first"
@@ -47,13 +47,6 @@ namespace :install do
       system %Q{ sudo apt-get install ack-grep }
       system %Q{ sudo dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep }
     end
-  end
-
-  desc 'Install and update all submodules'
-  task :submodules do
-    puts "Initializing and updating plugins..."
-    system %Q{ git submodule init }
-    system %Q{ git submodule update }
   end
 
   desc 'Add all symlinks'
@@ -93,16 +86,8 @@ namespace :clean do
   end
 end
 
-namespace :update do
-  desc 'Update git submodules'
-  task :submodules do
-    puts "Updating submodules"
-    system "git submodule foreach git pull origin master"
-  end
-end
-
 desc 'Perform all install tasks at once'
-task :install => ['install:submodules', 'install:symlinks', 'clean:snipmate']
+task :install => ['install:symlinks', 'clean:snipmate']
 
 desc 'Do a full update - including building anything external'
-task :update => ['update:submodules', 'clean:snipmate']
+task :update => ['clean:snipmate']

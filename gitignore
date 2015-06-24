@@ -6,6 +6,7 @@ personalrc
 .watchr
 bootstrap.rake
 config/application.yml
+vim/bundle
 .ruby-version
 .ruby-gemset
 .env

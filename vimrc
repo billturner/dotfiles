@@ -1,8 +1,48 @@
 set nocompatible
 filetype off
 
-" set up pathogen
-execute pathogen#infect()
+" Vundle config
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" Vundle itself
+Plugin 'gmarik/Vundle.vim'
+
+" Git
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+
+" Javascript
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
+Plugin 'burnettk/vim-angular'
+Plugin 'kchmck/vim-coffee-script'
+
+" Ruby/Rails
+Plugin 'tpope/vim-rails'
+Plugin 'janx/vim-rubytest'
+Plugin 'nelstrom/vim-textobj-rubyblock'
+Plugin 'tpope/vim-haml'
+
+" Design/Navigation
+Plugin 'bling/vim-airline'
+Plugin 'vivkin/flatland.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'mileszs/ack.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+
+" General
+Plugin 'Raimondi/delimitMate'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'billturner/snipmate.vim'
+Plugin 'tpope/vim-endwise'
+Plugin 'kana/vim-textobj-user'
+Plugin 'tpope/vim-ragtag'
+Plugin 'tpope/vim-surround'
+
+" Finish Vundle
+call vundle#end()
 
 filetype plugin indent on
 
