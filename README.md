@@ -18,10 +18,19 @@ Initial Mac setup
 Initial Ubuntu setup
 --------------------
 
-1. Install needed packages: `sudo apt-get install ctags silversearcher-ag`
+1. Install needed packages: `sudo apt-get install vim-nox ctags silversearcher-ag`
 
 Final setup
 -----------
+
+**General**
+
+To install the symbolic links, you will need some version of Ruby installed. To put the symbolic links in place:
+
+    cd ~/.dotfiles
+    rake install:symlinks
+
+If you have a file (like a `.vimrc`) already in your root directory, it will be backed up by adding the extension `.old` to it before the new symbolic link is added.
 
 **Vim**
 
@@ -31,4 +40,4 @@ Install the Vundle plugin:
     mkdir vim/bundle
     git clone https://github.com/gmarik/Vundle.vim.git vim/bundle/Vundle.vim
 
-Start up Vim, and install plugins in Vim via `:PluginInstall`
+Start up Vim, and install plugins via `:PluginInstall`
