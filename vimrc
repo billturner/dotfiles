@@ -12,6 +12,9 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 
+" General coding
+Plugin 'scrooloose/syntastic'
+
 " Javascript
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
@@ -31,11 +34,11 @@ Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'easymotion/vim-easymotion'
 
 " General
 Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'billturner/snipmate.vim'
 Plugin 'tpope/vim-endwise'
 Plugin 'kana/vim-textobj-user'
 Plugin 'tpope/vim-ragtag'
@@ -90,6 +93,9 @@ if has("statusline")
   endif
   set statusline+=\ col:%c,
   set statusline+=\ line\ %l\ of\ %L\ [%P]
+  set statusline+=\ %#warningmsg#
+  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%*
   set statusline+=\ 
 endif
 
@@ -109,7 +115,6 @@ set wildignore+=*.log
 " navigation/editing helpers
 imap <c-e> <c-o>$
 imap <c-a> <c-o>^
-nnoremap <leader><leader> <C-^>
 nmap j gj
 nmap k gk
 nnoremap <Leader>ll :set list<CR>
@@ -124,6 +129,7 @@ if exists("&colorcolumn")
   set colorcolumn=80,120
 endif
 set number
+" nnoremap <leader><leader> <C-^>
 set backspace=indent,eol,start
 set list
 set listchars=tab:▸\ ,eol:¬
@@ -154,6 +160,13 @@ endif
 "
 " PLUGIN CONFIGS
 "
+" syntastic:
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 " ctrlp:
 nnoremap <Leader>t :CtrlP<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
