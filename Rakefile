@@ -7,48 +7,7 @@ require 'etc'
 HOME_DIR = Etc.getpwuid.dir
 DOTFILES_DIR = File.expand_path(File.dirname(__FILE__))
 
-namespace :setup do
-  desc 'Determine if system is ready for all bundles'
-  task :test do
-    current_vim = `vim --version`
-    current_vim_version = current_vim[/\b(\d+(\.\d+)?)\b/].to_f
-    messages = ""
-    messages << " * Ruby support not built in (may be needed for some plugins)\n" if current_vim[/-ruby/]
-    if messages.empty?
-      puts "The current system Vim seems like it should support this configuration and all bundled plugins!\n"
-    else
-      puts "The current system Vim does not seem to be ready:\n#{messages}"
-    end
-  end
-
-  desc 'Install necessary Vim package on ubuntu'
-  task :ubuntu do
-    puts "Installing vim-nox package"
-    system "sudo apt-get install vim-nox"
-  end
-end
-
 namespace :install do
-  namespace :helpers do
-    desc "Install the helper applications (via Homebrew)"
-    task :mac do
-      if system %Q{ which brew }
-        puts "Installing ack, the_silver_searcher, and ctags"
-        system %Q{ brew install ack ctags the_silver_searcher }
-      else
-        puts "Install homebrew first"
-      end
-    end
-    desc "Install the helper applications (via apt-get)"
-    task :ubuntu do
-      puts "Installing ctags and silver searcher"
-      system %Q{ sudo apt-get install ctags silversearcher-ag }
-      puts "Installing ack-grep (and adding symlink to ack)"
-      system %Q{ sudo apt-get install ack-grep }
-      system %Q{ sudo dpkg-divert --local --divert /usr/bin/ack --rename --add /usr/bin/ack-grep }
-    end
-  end
-
   desc 'Add all symlinks'
   task :symlinks do
     %w{gitignore gitconfig vimrc gvimrc agignore ackrc ctags irbrc gemrc bash_profile bashrc tmux.conf railsrc psqlrc vim}.each do |sym|
@@ -77,17 +36,5 @@ namespace :install do
   end
 end
 
-namespace :clean do
-  desc 'Clean out default snipMate snippets'
-  task :snipmate do
-    snippets_dir = File.join(File.expand_path(File.dirname(__FILE__)), 'bundle', 'vim-snipmate', 'snippets')
-    puts "Removing default snipMate snippets"
-    FileUtils.rm Dir.glob(snippets_dir + "/*.snippets")
-  end
-end
-
 desc 'Perform all install tasks at once'
-task :install => ['install:symlinks', 'clean:snipmate']
-
-desc 'Do a full update - including building anything external'
-task :update => ['clean:snipmate']
+task :install => ['install:symlinks']
