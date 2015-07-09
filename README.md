@@ -13,7 +13,7 @@ Initial Mac setup
 -----------------
 
 1. Install homebrew, via [their instructions](http://brew.sh/).
-2. Install homebrew packages: `brew install vim ctags the_silver_searcher`
+2. Install homebrew packages: `brew install vim ctags the_silver_searcher chruby ruby-install`
 
 Initial Ubuntu setup
 --------------------
