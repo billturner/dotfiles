@@ -8,6 +8,7 @@ export HISTCONTROL=erasedups
 export ARCHFLAGS='-arch x86_64'
 export AUTOFEATURE=true
 export TERM="screen-256color"
+export NVM_DIR=~/.nvm
 
 shopt -s histappend
 

@@ -152,14 +152,11 @@ set nowritebackup
 if has("autocmd")
   " various ruby file types
   autocmd BufNewFile,BufRead {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
-  " json formatting
-  autocmd BufNewFile,BufRead *.json set ft=javascript
+  " javascript formatting
+  autocmd BufNewFile,BufRead *.json,*.es6 set ft=javascript
   " markdown
   autocmd BufNewFile,BufRead *.markdown,*.mkd,*.md set ft=markdown
   autocmd FileType markdown setlocal wrap linebreak nolist
-  " textile
-  autocmd BufNewFile,BufRead *.textile set ft=textile
-  autocmd FileType textile setlocal wrap linebreak nolist
 endif
 
 "
