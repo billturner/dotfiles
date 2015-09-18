@@ -1,3 +1,5 @@
+snippet req
+	var ${1} = require('${2}');
 snippet log
 	console.log('${1}');
 snippet log,
@@ -6,7 +8,7 @@ snippet vfunc
 	var ${1} = function () {
 		${2}
 	};
-snippet vfunc()
+snippet vfunc(
 	var ${1} = function (${2}) {
 		${3}
 	};
@@ -14,7 +16,7 @@ snippet func
 	function ${1}() {
 		${2}
 	}
-snippet func()
+snippet func(
 	function ${1}(${2}) {
 		${3}
 	}

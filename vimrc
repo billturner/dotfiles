@@ -153,7 +153,7 @@ if has("autocmd")
   " various ruby file types
   autocmd BufNewFile,BufRead {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
   " javascript formatting
-  autocmd BufNewFile,BufRead *.json,*.es6 set ft=javascript
+  autocmd BufNewFile,BufRead *.json,*.es6,*.jsx set ft=javascript
   " markdown
   autocmd BufNewFile,BufRead *.markdown,*.mkd,*.md set ft=markdown
   autocmd FileType markdown setlocal wrap linebreak nolist

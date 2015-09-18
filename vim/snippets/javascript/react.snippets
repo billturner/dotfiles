@@ -1,0 +1,12 @@
+snippet Req
+	var React = require('react');
+snippet Rcc
+	var ${1} = React.createClass({
+		render: function () {
+			return (
+				${2}
+			)
+		}
+	});
+snippet Rr
+	React.render(<${1} />, document.getElementById('${2}'));
