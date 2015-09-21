@@ -8,7 +8,7 @@ snippet vfunc
 	var ${1} = function () {
 		${2}
 	};
-snippet vfunc(
+snippet vfunc()
 	var ${1} = function (${2}) {
 		${3}
 	};
@@ -16,7 +16,13 @@ snippet func
 	function ${1}() {
 		${2}
 	}
-snippet func(
+snippet func()
 	function ${1}(${2}) {
 		${3}
 	}
+snippet mex
+	module.exports = ${1};
+snippet mex{}
+	module.exports = {
+		${1}
+	};

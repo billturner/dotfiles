@@ -1,5 +1,7 @@
 snippet Req
 	var React = require('react');
+snippet Rim
+	import React from 'react';
 snippet Rcc
 	var ${1} = React.createClass({
 		render: function () {
@@ -8,5 +10,45 @@ snippet Rcc
 			)
 		}
 	});
+snippet Rex
+	class ${1} extends React.Component {
+		render() {
+			return (
+				${2}
+			)
+		}
+	};
 snippet Rr
 	React.render(<${1} />, document.getElementById('${2}'));
+snippet Rpt
+	${1}.propTypes = {
+		${2}
+	};
+snippet Rpto
+	React.PropTypes.object${1}
+snippet Rpta
+	React.PropTypes.array${1}
+snippet Rpts
+	React.PropTypes.string${1}
+snippet Rptf
+	React.PropTypes.func${1}
+snippet Rgis
+	getInitialState() {
+		${1}
+	}
+snippet Rcdm
+	componentDidMount() {
+		${1}
+	}
+snippet Rcwrp
+	componentWillReceiveProps() {
+		${1}
+	}
+snippet Rcwm
+	componentWillMount() {
+		${1}
+	}
+snippet Rcwu
+	componentWillUnmount() {
+		${1}
+	}
