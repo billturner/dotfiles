@@ -62,9 +62,8 @@ let mapleader=","
 
 " colorscheme
 if &t_Co >= 256 || has("gui_running")
-  set background=dark
-  " iTerm2 theme base16-tomorrow.dark (16)
-  colorscheme base16-tomorrow
+  set background=light
+  colorscheme base16-solarized
 endif
 
 " filetype/encoding
@@ -176,7 +175,7 @@ let g:syntastic_html_tidy_ignore_errors = ["is not recognized!", "discarding une
 nnoremap <Leader>t :CtrlP<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
 
-let g:ctrlp_custom_ignore = '_site\|bundle\|tmp\|coverage\|vendor\|node_modules'
+let g:ctrlp_custom_ignore = '_site\|bower_components\|build\|bundle\|tmp\|coverage\|vendor\|node_modules'
 let g:ctrlp_clear_cache_on_exit=1
 let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode='r'

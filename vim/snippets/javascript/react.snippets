@@ -15,7 +15,7 @@ snippet Rex
 		render() {
 			return (
 				${2}
-			)
+			);
 		}
 	};
 snippet Rr
@@ -51,4 +51,11 @@ snippet Rcwm
 snippet Rcwu
 	componentWillUnmount() {
 		${1}
+	}
+snippet Rcon
+	constructor(${1:props}) {
+		super(${2:props});
+		this.state = {
+			${3}
+		};
 	}

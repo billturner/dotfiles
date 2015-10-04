@@ -1,4 +1,14 @@
-snippet gulpt
+snippet Gt
 	gulp.task('${1}', function () {
 		${2}
 	});
+snippet Gt[
+	gulp.task('${1}', ['${2}'], function () {
+		${3}
+	});
+snippet Gs
+	gulp.src(${1})
+snippet Gd
+	gulp.dest(${1})
+snippet Gw
+	gulp.watch(${1}, ['${2}']);
