@@ -1,6 +1,6 @@
 # ENV variables
 export GEM_EDITOR="vim"
-export PATH="/usr/local/opt/php55/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/local/share/npm/bin:/usr/local/pgsql/bin:/usr/local/sbin:$PATH"
+export PATH="/Applications/VirtualBox.app/Contents/MacOS:/usr/local/opt/php55/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/local/share/npm/bin:/usr/local/pgsql/bin:/usr/local/sbin:$PATH"
 export LC_CTYPE=en_US.UTF-8
 export EDITOR=vim
 export EVENT_NOKQUEUE=1
@@ -115,21 +115,28 @@ function tmuxsplit {
 # * color tips from: http://blog.sanctum.geek.nz/bash-prompts/
 COLOR_RED='\[\e[0;2;31m\]'
 COLOR_GREEN='\[\e[32m\]'
+COLOR_YELLOW='\[\e[33m\]'
 COLOR_BLUE='\[\e[34m\]'
 COLOR_RESET='\[\e[0m\]'
 
 # git branch
 function _git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ [\1]/'
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
 
 function _ruby_version {
   if (which ruby | grep -q ruby); then
-    ruby -v | cut -d" " -f2
+    ruby -v | cut -d" " -f2 | sed -e 's/p[0-9]*//g'
   fi
 }
 
-export PS1="\u@\h:\w $COLOR_RED\$(_ruby_version)$COLOR_RESET$COLOR_BLUE\$(_git_branch)$COLOR_RESET$ "
+function _node_version {
+  if (nvm | grep -q nvm); then
+    nvm current | sed -e 's/^v//' -e 's/none/-/'
+  fi
+}
+
+export PS1="\u@\h:\w $COLOR_YELLOW"[N@"\$(_node_version)"]"$COLOR_RESET$COLOR_RED"[R@"\$(_ruby_version)"]"$COLOR_RESET$COLOR_BLUE"[G@"\$(_git_branch)"]"$COLOR_RESET$ "
 
 # load ssh-agent
 if [ -f ~/.ssh/agent.sh ]; then source ~/.ssh/agent.sh ; fi
@@ -138,8 +145,10 @@ if [ -f ~/.ssh/agent.sh ]; then source ~/.ssh/agent.sh ; fi
 # if [ -f /usr/local/etc/bash_completion ]; then source /usr/local/etc/bash_completion ; fi
 
 # load tmuxinator helpers
-if [ -f ~/.bin/tmuxinator.bash ]; then source ~/.bin/tmuxinator.bash ; fi
+# if [ -f ~/.bin/tmuxinator.bash ]; then source ~/.bin/tmuxinator.bash ; fi
 
 # include a personal and work rc files if found
 if [ -f ~/.personal.bashrc ]; then source ~/.personal.bashrc ; fi
 if [ -f ~/.work.bashrc ]; then source ~/.work.bashrc ; fi
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

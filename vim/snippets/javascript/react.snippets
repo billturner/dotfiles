@@ -17,9 +17,19 @@ snippet Rex
 				${2}
 			);
 		}
-	};
+	}
 snippet Rr
 	React.render(<${1} />, document.getElementById('${2}'));
+snippet Rdr
+	ReactDOM.render(
+		<${1} />,
+		document.getElementById('${2}')
+	);
+snippet Rdrq
+	ReactDOM.render(
+		<${1} />,
+		document.querySelector('${2}')
+	);
 snippet Rpt
 	${1}.propTypes = {
 		${2}
@@ -53,9 +63,13 @@ snippet Rcwu
 		${1}
 	}
 snippet Rcon
-	constructor(${1:props}) {
-		super(${2:props});
+	constructor(${1}) {
+		super(${2});
 		this.state = {
 			${3}
 		};
 	}
+snippet Rss
+	this.setState({
+		${1}
+	});
