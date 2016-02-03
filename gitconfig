@@ -14,7 +14,7 @@
 	summary = true
 [core]
 	editor = vim
-	excludesfile = /Users/billturner/.gitignore
+	excludesfile = /Users/bturner/.gitignore_global
 [github]
 	user = billturner
 [difftool "sourcetree"]

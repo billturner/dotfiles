@@ -9,6 +9,7 @@ export ARCHFLAGS='-arch x86_64'
 export AUTOFEATURE=true
 export TERM="screen-256color"
 export NVM_DIR=~/.nvm
+export HALO2=1
 
 shopt -s histappend
 
@@ -50,6 +51,12 @@ alias rc="be rails c"
 alias rs="be rails s"
 alias brake="bundle exec rake"
 alias brr="brake routes"
+
+# tmux aliases
+alias tnew="tmux new -s"
+alias tkill="tmux kill-session -t"
+alias tatt="tmux a -t"
+alias tls="tmux ls"
 
 # various aliases
 alias pubkey="cat ~/.ssh/id_dsa.pub | pbcopy"
@@ -139,7 +146,7 @@ function _node_version {
 export PS1="\u@\h:\w $COLOR_YELLOW"[N@"\$(_node_version)"]"$COLOR_RESET$COLOR_RED"[R@"\$(_ruby_version)"]"$COLOR_RESET$COLOR_BLUE"[G@"\$(_git_branch)"]"$COLOR_RESET$ "
 
 # load ssh-agent
-if [ -f ~/.ssh/agent.sh ]; then source ~/.ssh/agent.sh ; fi
+# if [ -f ~/.ssh/agent.sh ]; then source ~/.ssh/agent.sh ; fi
 
 # load bash-completion
 # if [ -f /usr/local/etc/bash_completion ]; then source /usr/local/etc/bash_completion ; fi
