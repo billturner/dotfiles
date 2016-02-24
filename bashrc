@@ -9,7 +9,6 @@ export ARCHFLAGS='-arch x86_64'
 export AUTOFEATURE=true
 export TERM="screen-256color"
 export NVM_DIR=~/.nvm
-export HALO2=1
 
 shopt -s histappend
 
@@ -52,10 +51,16 @@ alias rs="be rails s"
 alias brake="bundle exec rake"
 alias brr="brake routes"
 
+# docker aliases
+alias dm="docker-machine"
+alias dms="docker-machine start"
+alias dmst="docker-machine status"
+alias dk="docker"
+
 # tmux aliases
 alias tnew="tmux new -s"
 alias tkill="tmux kill-session -t"
-alias tatt="tmux a -t"
+alias tat="tmux a -t"
 alias tls="tmux ls"
 
 # various aliases

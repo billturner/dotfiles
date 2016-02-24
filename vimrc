@@ -14,6 +14,7 @@ Plugin 'airblade/vim-gitgutter'
 
 " General coding
 Plugin 'scrooloose/syntastic'
+Plugin 'mtscout6/syntastic-local-eslint.vim'
 
 " Javascript
 Plugin 'jelera/vim-javascript-syntax'
