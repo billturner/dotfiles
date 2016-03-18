@@ -135,6 +135,7 @@ if exists("&colorcolumn")
   set colorcolumn=80,120
 endif
 set number
+set relativenumber
 " nnoremap <leader><leader> <C-^>
 set backspace=indent,eol,start
 set list

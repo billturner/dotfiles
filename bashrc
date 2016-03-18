@@ -1,6 +1,6 @@
 # ENV variables
 export GEM_EDITOR="vim"
-export PATH="/Applications/VirtualBox.app/Contents/MacOS:/usr/local/opt/php55/bin:/usr/local/bin:/usr/local/heroku/bin:/usr/local/share/npm/bin:/usr/local/pgsql/bin:/usr/local/sbin:$PATH"
+export PATH="/Applications/VirtualBox.app/Contents/MacOS:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/pgsql/bin:/usr/local/sbin:$PATH"
 export LC_CTYPE=en_US.UTF-8
 export EDITOR=vim
 export EVENT_NOKQUEUE=1
@@ -9,6 +9,7 @@ export ARCHFLAGS='-arch x86_64'
 export AUTOFEATURE=true
 export TERM="screen-256color"
 export NVM_DIR=~/.nvm
+export ANDROID_HOME=/usr/local/opt/android-sdk
 
 shopt -s histappend
 
@@ -77,52 +78,6 @@ function tmux_colors {
   done
 }
 
-# tmux setups
-function tmuxvert {
-  DIR="${1:?Directory not provided}"
-  NAME="${2:-editing}"
-
-  if [ ! -d "$DIR" ]; then
-    echo "No such directory"
-  else
-    cd "$DIR"
-
-    tmux has-session -t "$NAME" 2>/dev/null
-    if [ $? != 0 ]; then
-      tmux new-session -d -s $NAME -n "EDIT"
-      tmux split-window -t $NAME:1.0 -h
-
-      tmux send-keys -t $NAME:1.0 "vim" C-m
-    fi
-    tmux select-pane -t $NAME:1.0
-    tmux attach-session -d -t $NAME
-  fi
-}
-
-function tmuxsplit {
-  DIR="${1:?Directory not provided}"
-  NAME="${2:-editing}"
-
-  if [ ! -d "$DIR" ]; then
-    echo "No such directory"
-  else
-    cd "$DIR"
-
-    tmux has-session -t "$NAME" 2>/dev/null
-    if [ $? != 0 ]; then
-      tmux new-session -d -s $NAME -n "EDIT"
-      tmux new-window -t $NAME:2 -n "tests/prompt"
-      tmux split-window -t $NAME:2.0 -v
-
-      tmux send-keys -t $NAME:1 "vim" C-m
-      # tmux send-keys -t $NAME:2.0 "top pane" C-m
-      # tmux send-keys -t $NAME:2.1 "bottom pane" C-m
-    fi
-    tmux select-window -t $NAME:1
-    tmux attach-session -d -t $NAME
-  fi
-}
-
 # prompt stuff
 # * color tips from: http://blog.sanctum.geek.nz/bash-prompts/
 COLOR_RED='\[\e[0;2;31m\]'
@@ -149,15 +104,6 @@ function _node_version {
 }
 
 export PS1="\u@\h:\w $COLOR_YELLOW"[N@"\$(_node_version)"]"$COLOR_RESET$COLOR_RED"[R@"\$(_ruby_version)"]"$COLOR_RESET$COLOR_BLUE"[G@"\$(_git_branch)"]"$COLOR_RESET$ "
-
-# load ssh-agent
-# if [ -f ~/.ssh/agent.sh ]; then source ~/.ssh/agent.sh ; fi
-
-# load bash-completion
-# if [ -f /usr/local/etc/bash_completion ]; then source /usr/local/etc/bash_completion ; fi
-
-# load tmuxinator helpers
-# if [ -f ~/.bin/tmuxinator.bash ]; then source ~/.bin/tmuxinator.bash ; fi
 
 # include a personal and work rc files if found
 if [ -f ~/.personal.bashrc ]; then source ~/.personal.bashrc ; fi
