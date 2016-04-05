@@ -82,17 +82,17 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 
+
 " statusline
 set laststatus=2
+
 if has("statusline")
+  hi StatusLine ctermbg=145 ctermfg=Black
   set statusline=""
-  set statusline+=\ %n\ 
-  set statusline+=%{exists('g:loaded_fugitive')?'⎇\ ':''}
-  set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
-  set statusline+=%{exists('g:loaded_fugitive')?'\ ':''}
-  set statusline+=%f    " filename
-  set statusline+=\ %y  " filetype
+  set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline()\ :''}
+  set statusline+=\ %f  " filename
   set statusline+=\ %m  " modified?
+  set statusline+=\ %y  " filetype
   set statusline+=\ %r  " read-only?
   set statusline+=%= " right side of statusline starts
   set statusline+=\ col:%c,
