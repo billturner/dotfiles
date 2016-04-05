@@ -20,19 +20,16 @@ Plugin 'mtscout6/syntastic-local-eslint.vim'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 Plugin 'burnettk/vim-angular'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'mxw/vim-jsx'
 
 " Ruby/Rails
 Plugin 'tpope/vim-rails'
 Plugin 'janx/vim-rubytest'
 Plugin 'nelstrom/vim-textobj-rubyblock'
-Plugin 'tpope/vim-haml'
 
 " Design/Navigation
-Plugin 'bling/vim-airline'
+" Plugin 'bling/vim-airline'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'vivkin/flatland.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/nerdtree'
@@ -89,18 +86,19 @@ set expandtab
 set laststatus=2
 if has("statusline")
   set statusline=""
-  set statusline+=%n:%f
-  set statusline+=\ %m
-  set statusline+=\ %r
-  set statusline+=\ %y
+  set statusline+=\ %n\ 
+  set statusline+=%{exists('g:loaded_fugitive')?'⎇\ ':''}
+  set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline():''}
+  set statusline+=%{exists('g:loaded_fugitive')?'\ ':''}
+  set statusline+=%f    " filename
+  set statusline+=\ %y  " filetype
+  set statusline+=\ %m  " modified?
+  set statusline+=\ %r  " read-only?
   set statusline+=%= " right side of statusline starts
-  if exists("g:loaded_fugitive")
-    set statusline+=%{fugitive#statusline()}
-  endif
   set statusline+=\ col:%c,
   set statusline+=\ line\ %l\ of\ %L\ [%P]
   set statusline+=\ %#warningmsg#
-  set statusline+=%{SyntasticStatuslineFlag()}
+  set statusline+=%{exists('g:loaded_syntastic_plugin')?SyntasticStatuslineFlag():''}
   set statusline+=%*
   set statusline+=\ 
 endif
@@ -155,7 +153,7 @@ if has("autocmd")
   " various ruby file types
   autocmd BufNewFile,BufRead {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
   " javascript formatting
-  autocmd BufNewFile,BufRead *.json,*.es6,*.jsx set ft=javascript
+  autocmd BufNewFile,BufRead *.ts,*.json,*.es6,*.jsx set ft=javascript
   " markdown
   autocmd BufNewFile,BufRead *.markdown,*.mkd,*.md set ft=markdown
   autocmd FileType markdown setlocal wrap linebreak nolist
@@ -178,7 +176,7 @@ let g:syntastic_html_tidy_ignore_errors = ["is not recognized!", "discarding une
 nnoremap <Leader>t :CtrlP<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
 
-let g:ctrlp_custom_ignore = '_site\|bower_components\|build\|bundle\|tmp\|coverage\|vendor\|node_modules'
+let g:ctrlp_custom_ignore = '_site\|dist\|bower_components\|build\|bundle\|tmp\|coverage\|vendor\|node_modules'
 let g:ctrlp_clear_cache_on_exit=1
 let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode='r'
@@ -200,7 +198,7 @@ au Filetype nerdtree setlocal nolist
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " vim-rails
-let g:rails_statusline=1
+let g:rails_statusline=0
 
 " vim-rubytest
 nmap <Leader>y <Plug>RubyTestRun
@@ -226,17 +224,17 @@ let g:gitgutter_eager = 0
 highlight clear SignColumn
 
 " vim-airline
-let g:airline_powerline_fonts = 0
-let g:airline_left_sep = ""
-let g:airline_right_sep = ""
-let g:airline_detect_modified = 0
-let g:airline#extensions#whitespace#enabled = 0
-let g:airline#extensions#hunks#enabled = 0
-let g:airline_symbols = {}
-let g:airline_symbols.branch = "⎇"
-let g:airline_symbols.paste = "ρ"
-let g:airline_section_c = "%m %f"
-let g:airline_theme = "base16"
+" let g:airline_powerline_fonts = 0
+" let g:airline_left_sep = ""
+" let g:airline_right_sep = ""
+" let g:airline_detect_modified = 0
+" let g:airline#extensions#whitespace#enabled = 0
+" let g:airline#extensions#hunks#enabled = 0
+" let g:airline_symbols = {}
+" let g:airline_symbols.branch = "⎇"
+" let g:airline_symbols.paste = "ρ"
+" let g:airline_section_c = "%m %f"
+" let g:airline_theme = "base16"
 
 " tagbar & tags related
 nnoremap <leader>r :TagbarToggle<CR>

@@ -24,19 +24,22 @@ alias nginx.restart='nginx.stop && nginx.start'
 
 # helper aliases
 alias ls="ls -laGF"
-alias mbash="vim ~/.bashrc"
-alias rbash="source ~/.bashrc"
+alias ebash="vim ~/.bashrc"
+alias sbash="source ~/.bashrc"
 alias rmds="find . -name *.DS_Store -type f -exec rm {} \;"
 alias npm-exec='PATH=$(npm bin):$PATH'
 
 # tmux aliases
-alias tmk="tmux kill-session -t"
-alias tml="tmux ls"
-alias tma="tmux attach -t"
+alias tnew="tmux new -s"
+alias tko="tmux kill-session -t"
+alias tat="tmux a -t"
+alias tls="tmux ls"
 
 # git aliases
 alias gs="git status"
 alias gnew="git ls-files -o --exclude-standard | xargs git add"
+alias gbr="git br"
+alias gbrr="git br -a"
 
 # git flow aliases
 alias gffs="git flow feature start"
@@ -45,10 +48,7 @@ alias gffr="git flow feature rebase"
 
 # rails 3/4 aliases
 alias be="bundle exec"
-alias r="be rails"
-alias rg="be rails g"
-alias rc="be rails c"
-alias rs="be rails s"
+alias beer="bundle exec rails"
 alias brake="bundle exec rake"
 alias brr="brake routes"
 
@@ -57,12 +57,6 @@ alias dm="docker-machine"
 alias dms="docker-machine start"
 alias dmst="docker-machine status"
 alias dk="docker"
-
-# tmux aliases
-alias tnew="tmux new -s"
-alias tkill="tmux kill-session -t"
-alias tat="tmux a -t"
-alias tls="tmux ls"
 
 # various aliases
 alias pubkey="cat ~/.ssh/id_dsa.pub | pbcopy"

@@ -7,6 +7,7 @@
 --ignore-dir=build
 --ignore-dir=node_modules
 --ignore-dir=vendor
+--ignore-dir=dist
 --type-set=coffee=.coffee
 --type-add=ruby=.ru
 --type-add=ruby=.rake
