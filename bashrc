@@ -37,6 +37,7 @@ alias tls="tmux ls"
 
 # git aliases
 alias gs="git status"
+alias gp="git pull"
 alias gnew="git ls-files -o --exclude-standard | xargs git add"
 alias gbr="git br"
 alias gbrr="git br -a"
@@ -45,6 +46,12 @@ alias gbrr="git br -a"
 alias gffs="git flow feature start"
 alias gfff="git flow feature finish"
 alias gffr="git flow feature rebase"
+
+# nvm aliases
+alias nu="nvm use"
+alias ni="nvm install"
+alias nls="nvm ls"
+alias nlsr="nvm ls-remote"
 
 # rails 3/4 aliases
 alias be="bundle exec"

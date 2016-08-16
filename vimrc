@@ -28,7 +28,6 @@ Plugin 'janx/vim-rubytest'
 Plugin 'nelstrom/vim-textobj-rubyblock'
 
 " Design/Navigation
-" Plugin 'bling/vim-airline'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'mileszs/ack.vim'
@@ -61,8 +60,8 @@ let mapleader=","
 
 " colorscheme
 if &t_Co >= 256 || has("gui_running")
-  set background=light
-  colorscheme base16-solarized
+  set background=dark
+  colorscheme base16-tomorrow
 endif
 
 " filetype/encoding
@@ -87,7 +86,7 @@ set expandtab
 set laststatus=2
 
 if has("statusline")
-  hi StatusLine ctermbg=145 ctermfg=Black
+  " hi StatusLine ctermbg=145 ctermfg=Black
   set statusline=""
   set statusline+=%{exists('g:loaded_fugitive')?fugitive#statusline()\ :''}
   set statusline+=\ %f  " filename
@@ -222,19 +221,6 @@ let g:gitgutter_realtime = 0
 let g:gitgutter_eager = 0
 " fix vim-gitgutter column color
 highlight clear SignColumn
-
-" vim-airline
-" let g:airline_powerline_fonts = 0
-" let g:airline_left_sep = ""
-" let g:airline_right_sep = ""
-" let g:airline_detect_modified = 0
-" let g:airline#extensions#whitespace#enabled = 0
-" let g:airline#extensions#hunks#enabled = 0
-" let g:airline_symbols = {}
-" let g:airline_symbols.branch = "⎇"
-" let g:airline_symbols.paste = "ρ"
-" let g:airline_section_c = "%m %f"
-" let g:airline_theme = "base16"
 
 " tagbar & tags related
 nnoremap <leader>r :TagbarToggle<CR>
