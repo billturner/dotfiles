@@ -81,7 +81,6 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 
-
 " statusline
 set laststatus=2
 
@@ -147,6 +146,9 @@ set noswapfile
 set nobackup
 set nowritebackup
 
+" Helpful commands
+command! Jsonf %!python -m json.tool
+
 " Other filetypes
 if has("autocmd")
   " various ruby file types
@@ -164,7 +166,8 @@ endif
 " syntastic:
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_ruby_checkers = ['rubocop', 'mri']
-let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_loc_list_height = 5
 let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
