@@ -13,10 +13,14 @@
 (setq package-list
       '(
         base16-theme
+        helm
+        helm-ag
+        helm-projectile
 	js2-mode
 	json-mode
 	magit
         markdown-mode
+        projectile
         ruby-mode
         scss-mode
         yaml-mode
@@ -60,6 +64,13 @@
 ;; set theme
 (require 'base16-theme)
 
+;; helm & projectile & ag
+(require 'helm-projectile)
+(projectile-global-mode)
+(helm-projectile-on)
+(global-set-key (kbd "C-x f") 'helm-projectile-find-file)
+(global-set-key (kbd "C-x a") 'helm-projectile-ag)
+
 ;; js2-mode
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
@@ -96,6 +107,10 @@
 ;; other plugins
 (require 'json-mode)
 (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
+
+;; lisp and slime
+;; (load (expand-file-name "~/quicklisp/slime-helper.el"))
+;; (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
