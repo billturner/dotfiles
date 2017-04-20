@@ -28,9 +28,23 @@ pids
 logs
 results
 
+# for npm/node
 npm-debug.log
 node_modules
 bower_components
+
 bin
 env/*
 temp/*
+
+# for emacs
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+.org-id-locations
+*_archive
+/elpa/
