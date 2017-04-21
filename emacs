@@ -1,4 +1,12 @@
 ;; emacs config
+;;
+;; TODO:
+;; * show trailing space/invisibles
+;; * rubocop & eslint integration
+;; * org mode
+;; * install instructions for emacs & lisp
+;; * css- & web-mode addition?
+;; * change font?
 
 ;; package config
 (require 'package)
@@ -6,9 +14,9 @@
 (setq package-archives '(("elpa" . "http://tromey.com/elpa/")
                          ("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
-			 ("melpa" . "http://melpa.milkbox.net/packages/")
-			 ("org" . "http://orgmode.org/elpa/")
-			 ))
+                         ("melpa" . "http://melpa.milkbox.net/packages/")
+                         ("org" . "http://orgmode.org/elpa/")
+                         ))
 
 (setq package-list
       '(
@@ -16,15 +24,16 @@
         helm
         helm-ag
         helm-projectile
-	js2-mode
-	json-mode
-	magit
+        js2-mode
+        json-mode
+        magit
         markdown-mode
+        neotree
         projectile
         ruby-mode
         scss-mode
         yaml-mode
-	))
+        ))
 
 (package-initialize)
 
@@ -45,7 +54,8 @@
 (setq linum-format "%d ")
 (global-linum-mode 1)
 
-;; theme
+;; set up theme
+(require 'base16-theme)
 (load-theme 'base16-tomorrow-night t t)
 (enable-theme 'base16-tomorrow-night)
 
@@ -61,8 +71,10 @@
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
-;; set theme
-(require 'base16-theme)
+;; neotree setup
+(require 'neotree)
+(global-set-key (kbd "C-x t") 'neotree-toggle)
+(setq neo-smart-open t)
 
 ;; helm & projectile & ag
 (require 'helm-projectile)
