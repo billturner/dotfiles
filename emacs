@@ -1,12 +1,4 @@
 ;; emacs config
-;;
-;; TODO:
-;; * show trailing space/invisibles
-;; * rubocop & eslint integration
-;; * org mode
-;; * install instructions for emacs & lisp
-;; * css- & web-mode addition?
-;; * change font?
 
 ;; package config
 (require 'package)
@@ -20,18 +12,25 @@
 
 (setq package-list
       '(
+        add-node-modules-path
         base16-theme
+        fill-column-indicator
         helm
         helm-ag
         helm-projectile
+        highlight-chars
         js2-mode
         json-mode
         magit
         markdown-mode
         neotree
+        nlinum
+        ;; paredit
         projectile
         ruby-mode
         scss-mode
+        slime
+        web-mode
         yaml-mode
         ))
 
@@ -51,8 +50,9 @@
 (tool-bar-mode -1)
 (column-number-mode t)
 
-(setq linum-format "%d ")
-(global-linum-mode 1)
+;; line numbers
+(setq nlinum-format "%d ")
+(global-nlinum-mode)
 
 ;; set up theme
 (require 'base16-theme)
@@ -62,31 +62,73 @@
 ;; editing prefs
 (setq show-trailing-whitespace t)
 (setq-default indent-tabs-mode nil)
-(setq tab-width 2)
+(setq-default tab-width 2)
 (show-paren-mode t)
 (setq kill-whole-line t)
 (setq require-final-newline t)
+
+;; modeline changes
+(setq display-time-24hr-format t)
+(display-time-mode +1)
 
 ;; no backup files or autosaving
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
+;; fill-column-indicator
+(require 'fill-column-indicator)
+(define-globalized-minor-mode global-fci-mode fci-mode (lambda () (fci-mode 1)))
+(global-fci-mode 1)
+(setq fci-rule-column 80)
+
+;; highlight chars
+(require 'highlight-chars)
+(add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
+(add-hook 'font-lock-mode-hook 'hc-highlight-trailing-whitespace)
+
+;; org mode
+(setq org-return-follows-link t)
+(add-hook 'org-mode-hook (lambda () (nlinum-mode -1)))
+
+
 ;; neotree setup
 (require 'neotree)
 (global-set-key (kbd "C-x t") 'neotree-toggle)
-(setq neo-smart-open t)
+(setq neo-window-width 40)
+;; (setq neo-smart-open t)
 
 ;; helm & projectile & ag
+(require 'helm)
+(global-set-key (kbd "C-x C-b") 'helm-buffers-list)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(require 'helm-config)
+
 (require 'helm-projectile)
 (projectile-global-mode)
 (helm-projectile-on)
 (global-set-key (kbd "C-x f") 'helm-projectile-find-file)
 (global-set-key (kbd "C-x a") 'helm-projectile-ag)
+(setq projectile-globally-ignored-directories
+      (quote
+       (".git", "build", "dist", "node_modules", "vendor")))
+(setq projectile-globally-ignored-files
+      (quote
+       (".DS_Store", "TAGS", "tags")))
+(helm-mode 1)
 
 ;; js2-mode
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(setq js-indent-level 2)
+(setq-default js2-basic-offset 2)
+(setq-default js-indent-level 2)
+
+;; web-mode
+(require 'web-mode)
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-css-indent-offset 2)
+(setq web-mode-code-indent-offset 2)
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 
 ;; ruby-mode
 (require 'ruby-mode)
@@ -120,19 +162,26 @@
 (require 'json-mode)
 (add-to-list 'auto-mode-alist '("\\.json$" . json-mode))
 
-;; lisp and slime
-;; (load (expand-file-name "~/quicklisp/slime-helper.el"))
-;; (setq inferior-lisp-program "/usr/local/bin/sbcl")
+;; lisp, quicklisp, and slime
+(require 'slime)
+(add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
+(add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+(setq inferior-lisp-program "/usr/local/bin/sbcl")
+
+;; (require 'paredit)
+;; (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
+;; (add-hook 'lisp-interaction-mode-hook 'enable-paredit-mode)
+;; (add-hook 'lisp-mode-hook 'enable-paredit-mode)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(js2-bounce-indent-p t)
- '(js2-cleanup-whitespace t)
- '(js2-highlight-level 3)
- '(package-selected-packages (quote (yaml-mode json-mode magit js2-mode))))
+ '(package-selected-packages
+   (quote
+    (fill-column-indicator yaml-mode json-mode magit js2-mode))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
