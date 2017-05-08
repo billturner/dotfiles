@@ -14,6 +14,7 @@
       '(
         add-node-modules-path
         base16-theme
+        ;; expand-region
         fill-column-indicator
         helm
         helm-ag
@@ -49,6 +50,7 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (column-number-mode t)
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; line numbers
 (setq nlinum-format "%d ")
@@ -67,13 +69,26 @@
 (setq kill-whole-line t)
 (setq require-final-newline t)
 
-;; modeline changes
-(setq display-time-24hr-format t)
-(display-time-mode +1)
+(prefer-coding-system 'utf-8)
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
 
 ;; no backup files or autosaving
 (setq make-backup-files nil)
 (setq auto-save-default nil)
+
+;; iterm2 fixes for M-S
+(define-key input-decode-map "\e[1;10A" [M-S-up])
+(define-key input-decode-map "\e[1;10B" [M-S-down])
+(define-key input-decode-map "\e[1;10C" [M-S-right])
+(define-key input-decode-map "\e[1;10D" [M-S-left])
+
+(define-key input-decode-map "\e[1;3A" [M-up])
+(define-key input-decode-map "\e[1;3B" [M-down])
+(define-key input-decode-map "\e[1;3C" [M-right])
+(define-key input-decode-map "\e[1;3D" [M-left])
 
 ;; fill-column-indicator
 (require 'fill-column-indicator)
@@ -89,7 +104,6 @@
 ;; org mode
 (setq org-return-follows-link t)
 (add-hook 'org-mode-hook (lambda () (nlinum-mode -1)))
-
 
 ;; neotree setup
 (require 'neotree)
@@ -108,12 +122,14 @@
 (helm-projectile-on)
 (global-set-key (kbd "C-x f") 'helm-projectile-find-file)
 (global-set-key (kbd "C-x a") 'helm-projectile-ag)
-(setq projectile-globally-ignored-directories
-      (quote
-       (".git", "build", "dist", "node_modules", "vendor")))
-(setq projectile-globally-ignored-files
-      (quote
-       (".DS_Store", "TAGS", "tags")))
+(add-to-list 'projectile-globally-ignored-directories ".git")
+(add-to-list 'projectile-globally-ignored-directories "build")
+(add-to-list 'projectile-globally-ignored-directories "dist")
+(add-to-list 'projectile-globally-ignored-directories "node_modules")
+(add-to-list 'projectile-globally-ignored-directories "vendor")
+(add-to-list 'projectile-globally-ignored-files ".DS_Store")
+(add-to-list 'projectile-globally-ignored-files "tags")
+(add-to-list 'projectile-globally-ignored-files "TAGS")
 (helm-mode 1)
 
 ;; js2-mode
@@ -144,6 +160,12 @@
 (setq css-indent-level 2)
 (setq css-indent-offset 2)
 
+;; expand-region
+;; (require 'expand-region)
+;; (global-set-key (kbd "C-@") 'er/expand-region)
+;; temporary fix for https://github.com/magnars/expand-region.el/issues/220
+;; (setq shift-select-mode nil)
+
 ;; magit settings
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
@@ -168,6 +190,43 @@
 (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
 (load (expand-file-name "~/quicklisp/slime-helper.el"))
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
+
+;; personal functions
+;; commenting function from: http://stackoverflow.com/a/9697222/17773
+(defun my/comment-or-uncomment-region-or-line ()
+    "Comments or uncomments the region or the current line if there's no active region."
+    (interactive)
+    (let (beg end)
+        (if (region-active-p)
+            (setq beg (region-beginning) end (region-end))
+            (setq beg (line-beginning-position) end (line-end-position)))
+        (comment-or-uncomment-region beg end)
+        (next-logical-line)))
+(global-set-key (kbd "M-;") 'my/comment-or-uncomment-region-or-line)
+
+(defun shift-text (distance)
+  (if (use-region-p)
+      (let ((mark (mark)))
+        (save-excursion
+          (indent-rigidly (region-beginning)
+                          (region-end)
+                          distance)
+          (push-mark mark t t)
+          (setq deactivate-mark nil)))
+    (indent-rigidly (line-beginning-position)
+                    (line-end-position)
+                    distance)))
+
+(defun shift-right (count)
+  (interactive "p")
+  (shift-text count))
+
+(defun shift-left (count)
+  (interactive "p")
+  (shift-text (- count)))
+
+(global-set-key (kbd "C-x >") (lambda () (interactive) (shift-right 2)))
+(global-set-key (kbd "C-x <") (lambda () (interactive) (shift-left 2)))
 
 ;; (require 'paredit)
 ;; (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
