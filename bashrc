@@ -1,6 +1,6 @@
 # ENV variables
 export GEM_EDITOR="vim"
-export PATH="/Applications/VirtualBox.app/Contents/MacOS:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/pgsql/bin:/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/local/share/npm/bin:$HOME/.rvm/bin:/usr/local/sbin:$PATH"
 export LC_CTYPE=en_US.UTF-8
 export EDITOR=vim
 export EVENT_NOKQUEUE=1
@@ -10,6 +10,7 @@ export AUTOFEATURE=true
 export TERM="screen-256color"
 export NVM_DIR=~/.nvm
 export ANDROID_HOME=/usr/local/opt/android-sdk
+export NVM_DIR="/Users/billturner/.nvm"
 
 shopt -s histappend
 
@@ -110,5 +111,3 @@ export PS1="\u@\h:\w $COLOR_YELLOW"[N@"\$(_node_version)"]"$COLOR_RESET$COLOR_RE
 # include a personal and work rc files if found
 if [ -f ~/.personal.bashrc ]; then source ~/.personal.bashrc ; fi
 if [ -f ~/.work.bashrc ]; then source ~/.work.bashrc ; fi
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
