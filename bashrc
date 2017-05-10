@@ -69,7 +69,7 @@ alias dk="docker"
 # various aliases
 alias pubkey="cat ~/.ssh/id_dsa.pub | pbcopy"
 alias pyhttp="python -m SimpleHTTPServer"
-alias em="/usr/local/Cellar/emacs/25.1/Emacs.app/Contents/MacOS/Emacs -nw"
+alias em="/usr/local/Cellar/emacs/25.2/Emacs.app/Contents/MacOS/Emacs -nw"
 
 # for fat fingers
 alias bim="vim"
