@@ -31,6 +31,7 @@
         ruby-mode
         scss-mode
         slime
+        smartparens
         web-mode
         yaml-mode
         ))
@@ -134,9 +135,16 @@
 
 ;; js2-mode
 (require 'js2-mode)
+(add-hook 'js-mode-hook #'js2-minor-mode)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(setq-default js2-basic-offset 2)
-(setq-default js-indent-level 2)
+(setq js2-basic-offset 2)
+(setq js-indent-level 2)
+(setq js-switch-indent-offset 2)
+
+;; smartparens
+(require 'smartparens-config)
+;; only in js2-mode for now
+(add-hook 'js-mode-hook #'smartparens-mode)
 
 ;; web-mode
 (require 'web-mode)
