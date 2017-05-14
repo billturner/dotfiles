@@ -106,6 +106,19 @@
 (setq org-return-follows-link t)
 (add-hook 'org-mode-hook (lambda () (nlinum-mode -1)))
 
+;; org-capture
+(setq org-directory "~/src/org")
+(setq org-default-personal-file "~/src/org/organizer.org")
+(setq org-default-work-file "~/src/org/work.org")
+(global-set-key (kbd "C-c c") 'org-capture)
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline org-default-personal-file "Inbox")
+         "* TODO %^{Task}\n")
+        ("w" "Work Todo" entry (file+headline org-default-work-file "Inbox")
+         "* TODO %^{Task}\n")
+        )
+      )
+
 ;; neotree setup
 (require 'neotree)
 (global-set-key (kbd "C-x t") 'neotree-toggle)
