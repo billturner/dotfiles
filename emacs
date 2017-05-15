@@ -111,6 +111,20 @@
 (setq org-default-personal-file "~/src/org/organizer.org")
 (setq org-default-work-file "~/src/org/work.org")
 (global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c o")
+                (lambda () (interactive) (find-file org-default-personal-file)))
+(global-set-key (kbd "C-c w")
+                (lambda () (interactive) (find-file org-default-work-file)))
+(setq org-todo-keywords
+      '(
+        (sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+(setq org-todo-keyword-faces
+      '(("TODO" . (:foreground "orangered" :weight bold))
+        ("NEXT" . (:foreground "steelblue1" :weight bold))
+        ("WAITING" . (:foreground "lightgoldenrod" :weight bold))
+        ("DONE" . (:foreground "forestgreen" :weight bold))
+        ("CANCELLED" . (:foreground "forestgreen" :weight bold))
+        ))
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline org-default-personal-file "Inbox")
          "* TODO %^{Task}\n")

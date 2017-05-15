@@ -5,9 +5,9 @@
 #   chruby 2.2.2
 #   source /usr/local/share/chruby/auto.sh
 # fi
-
-if [ -f ~/.nvm/nvm.sh ]; then
-  source ~/.nvm/nvm.sh
+export NVM_DIR="$HOME/.nvm"
+if [ -f /usr/local/opt/nvm/nvm.sh ]; then
+  source /usr/local/opt/nvm/nvm.sh
 fi
 
 if [ -f ~/.bashrc ]; then source ~/.bashrc ; fi

@@ -10,7 +10,6 @@ export AUTOFEATURE=true
 export TERM="screen-256color"
 export NVM_DIR=~/.nvm
 export ANDROID_HOME=/usr/local/opt/android-sdk
-export NVM_DIR="/Users/billturner/.nvm"
 
 shopt -s histappend
 
