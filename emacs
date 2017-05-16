@@ -102,7 +102,7 @@
 (add-hook 'font-lock-mode-hook 'hc-highlight-tabs)
 (add-hook 'font-lock-mode-hook 'hc-highlight-trailing-whitespace)
 
-;; org mode
+;; orgmode
 (setq org-return-follows-link t)
 (add-hook 'org-mode-hook (lambda () (nlinum-mode -1)))
 
@@ -132,6 +132,13 @@
          "* TODO %^{Task}\n")
         )
       )
+(defun my/org-archive-done-tasks ()
+  (interactive)
+  (org-map-entries
+   (lambda ()
+     (org-archive-subtree)
+     (setq org-map-continue-from (outline-previous-heading)))
+   "/DONE" 'tree))
 
 ;; neotree setup
 (require 'neotree)
@@ -198,7 +205,7 @@
 ;; expand-region
 ;; (require 'expand-region)
 ;; (global-set-key (kbd "C-@") 'er/expand-region)
-;; temporary fix for https://github.com/magnars/expand-region.el/issues/220
+;; ;; temporary fix for https://github.com/magnars/expand-region.el/issues/220
 ;; (setq shift-select-mode nil)
 
 ;; magit settings
