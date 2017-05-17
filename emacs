@@ -127,9 +127,11 @@
         ))
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline org-default-personal-file "Inbox")
-         "* TODO %^{Task}\n")
+         "* TODO %^{Task}\n\n")
+        ("i" "Idea" entry (file+headline org-default-personal-file "Ideas")
+         "* %^{Idea} / %t\n\n")
         ("w" "Work Todo" entry (file+headline org-default-work-file "Inbox")
-         "* TODO %^{Task}\n")
+         "* TODO %^{Task}\n\n")
         )
       )
 (defun my/org-archive-done-tasks ()
