@@ -12,6 +12,7 @@ vim/bundle
 .env
 .env.test
 *.sublime-project
+.vscode/*
 
 .idea/*
 
