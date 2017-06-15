@@ -210,6 +210,7 @@
         web-mode-markup-indent-offset 2
         web-mode-css-index-offset 2
         web-mode-code-indent-offset 2
+        web-mode-attr-indent-offset 2
         web-mode-enable-current-element-highlight t))
 
 ;; ruby-mode
