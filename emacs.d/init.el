@@ -54,6 +54,7 @@
 (setq tab-width 2)
 (setq kill-whole-line t)
 (setq show-trailing-whitespace t)
+(setq sentence-end-double-space nil)
 
 ;; iTerm2 fixes
 (define-key input-decode-map "\e[1;10A" [M-S-up])
@@ -107,7 +108,9 @@
 (use-package ivy
   :ensure t
   :diminish (ivy-mode)
-  :bind ("C-x b" . ivy-switch-buffer)
+  :bind (("C-x b" . ivy-switch-buffer)
+         ("C-s" . swiper)
+         ("C-r" . swiper))
   :config
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
@@ -118,7 +121,7 @@
   :bind ("M-x" . counsel-M-x))
 (use-package projectile
   :ensure t
-  :diminish (projectile-mode . "Pr")
+  :diminish (projectile-mode . "pr")
   :config
   (projectile-global-mode)
   (setq projectile-completion-system 'ivy)
@@ -150,12 +153,12 @@
 ;; magit
 (use-package magit
   :ensure t
-  :bind (("C-x g" . magit-status)))
+  :bind ("C-x g" . magit-status))
 
 ;; smartparens
 (use-package smartparens
   :ensure t
-  :diminish smartparens-mode
+  :diminish (smartparens-mode . "sp")
   :config
   (add-hook 'js-mode-hook #'smartparens-mode)
   (use-package smartparens-config)
@@ -165,7 +168,7 @@
 (use-package js2-mode
   :ensure t
   :defer t
-  :diminish (js2-mode . "Js2")
+  ;; :diminish (js2-mode)
   :mode (("\\.js$" . js2-mode))
   :commands (js2-mode)
   :config
@@ -178,6 +181,7 @@
 (use-package json-mode
   :ensure t
   :defer t
+  :diminish (json-mode . "json")
   :mode (("\\.json\\'" . json-mode))
   :commands (json-mode))
 
@@ -185,56 +189,62 @@
 (use-package web-mode
   :ensure t
   :defer t
+  :diminish (web-mode . "web")
   :mode (("\\.html?\\'" . web-mode)
-	 ("\\.erb\\'" . web-mode)
-	 ("\\.mustache\\'" . web-mode))
+         ("\\.erb\\'" . web-mode)
+         ("\\.mustache\\'" . web-mode))
   :config
   (setq sgml-basic-offset 2
-	web-mode-markup-indent-offset 2
-	web-mode-css-index-offset 2
-	web-mode-code-indent-offset 2
-	web-mode-enable-current-element-highlight t))
+        web-mode-markup-indent-offset 2
+        web-mode-css-index-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-enable-current-element-highlight t))
 
 ;; ruby-mode
 (use-package ruby-mode
   :ensure t
   :defer t
+  :diminish (ruby-mode . "rb")
   :mode (("\\.rake$" . ruby-mode)
-	 ("\\.rb$" . ruby-mode)
-	 ("Rakefile$" . ruby-mode)
-	 ("\\.ru$" . ruby-mode)
-	 ("\\.gemspec$" . ruby-mode)
-	 ("Gemfile$" . ruby-mode)))
+         ("\\.rb$" . ruby-mode)
+         ("Rakefile$" . ruby-mode)
+         ("\\.ru$" . ruby-mode)
+         ("\\.gemspec$" . ruby-mode)
+         ("Gemfile$" . ruby-mode)))
 
 ;; scss-mode
 (use-package scss-mode
   :ensure t
+  :defer t
+  :diminish (scss-mode . "scss")
   :mode (("\\.scss$" . scss-mode))
   :config
   (setq scss-compile-at-save nil
-	css-indent-level 2
-	css-indent-offset 2))
+        css-indent-level 2
+        css-indent-offset 2))
 
 ;; yaml-mode
 (use-package yaml-mode
   :ensure t
   :defer t
+  :diminish (yaml-mode . "yml")
   :mode (("\\.yml$" . yaml-mode)
-	 ("\\.yaml$" . yaml-mode)))
+         ("\\.yaml$" . yaml-mode)))
 
 ;; markdown-mode
 (use-package markdown-mode
   :ensure t
   :defer t
   :mode (("\\.md$" . markdown-mode)
-	 ("\\.markdown$" . markdown-mode)
-	 ("README\\.md$" . gfm-mode))
+         ("\\.markdown$" . markdown-mode)
+         ("README\\.md$" . gfm-mode))
   :commands (markdown-mode gfm-mode))
 
 ;; haml-mode
 (use-package haml-mode
   :ensure t
-  :defer t)
+  :defer t
+  :diminish (haml-mode . "haml"))
 
 ;; org-mode
 (global-set-key (kbd "C-c o")
@@ -245,30 +255,31 @@
   :ensure t
   :mode ("\\.org\\'" . org-mode)
   :bind (("C-c c" . org-capture))
+  :diminish (org-mode . "org")
   :init (add-hook 'org-mode-hook (lambda () (nlinum-mode -1)))
   :config
   (progn
     (setq org-directory my-org-directory)
     (setq org-return-follows-link t)
     (setq org-capture-templates
-	  '(("t" "Todo" entry (file+headline my-default-org-file "Inbox")
-	     "* TODO %^{Task}\n\n")
-	    ("i" "Idea" entry (file+headline my-default-org-file "Ideas")
-	     "* %^{Idea} / %t\n\n")
-	    ("w" "Work Todo" entry (file+headline my-work-org-file "Inbox")
-	     "* TODO %^{Task}\n\n")
-	    )
-	  )
+          '(("t" "Todo" entry (file+headline my-default-org-file "Inbox")
+             "* TODO %^{Task}\n\n")
+            ("i" "Idea" entry (file+headline my-default-org-file "Ideas")
+             "* %^{Idea} / %t\n\n")
+            ("w" "Work Todo" entry (file+headline my-work-org-file "Inbox")
+             "* TODO %^{Task}\n\n")
+            )
+          )
     (setq org-todo-keywords
-	  '(
-	    (sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+          '(
+            (sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
     (setq org-todo-keyword-faces
-	  '(("TODO" . (:foreground "orangered" :weight bold))
-	    ("NEXT" . (:foreground "steelblue1" :weight bold))
-	    ("WAITING" . (:foreground "lightgoldenrod" :weight bold))
-	    ("DONE" . (:foreground "forestgreen" :weight bold))
-	    ("CANCELLED" . (:foreground "forestgreen" :weight bold))
-	    ))
+          '(("TODO" . (:foreground "orangered" :weight bold))
+            ("NEXT" . (:foreground "steelblue1" :weight bold))
+            ("WAITING" . (:foreground "lightgoldenrod" :weight bold))
+            ("DONE" . (:foreground "forestgreen" :weight bold))
+            ("CANCELLED" . (:foreground "forestgreen" :weight bold))
+            ))
     ))
 
 ;; lisp, slime
