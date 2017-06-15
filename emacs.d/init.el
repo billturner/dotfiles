@@ -50,7 +50,7 @@
 ;; editing options
 (setq show-paren-delay 0)
 (show-paren-mode 1)
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 (setq kill-whole-line t)
 (setq show-trailing-whitespace t)
@@ -177,6 +177,14 @@
         js-indent-level 2
         js-switch-indent-offset 2))
 
+;; js2-refactor
+(use-package js2-refactor
+  :ensure t
+  :config
+  (js2r-add-keybindings-with-prefix "C-c r")
+  (add-hook 'js2-mode-hook #'js2-refactor-mode))
+
+
 ;; json-mode
 (use-package json-mode
   :ensure t
@@ -194,6 +202,10 @@
          ("\\.erb\\'" . web-mode)
          ("\\.mustache\\'" . web-mode))
   :config
+  (add-hook 'after-change-major-mode-hook
+            (lambda ()
+              (when (string= major-mode "web-mode")
+                (turn-off-fci-mode))))
   (setq sgml-basic-offset 2
         web-mode-markup-indent-offset 2
         web-mode-css-index-offset 2
