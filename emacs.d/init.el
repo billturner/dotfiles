@@ -1,4 +1,4 @@
-;; init.el
+;;; init.el
 
 ;; package management
 (require 'package)
@@ -180,9 +180,31 @@
 ;; js2-refactor
 (use-package js2-refactor
   :ensure t
+  :defer t
   :config
   (js2r-add-keybindings-with-prefix "C-c r")
   (add-hook 'js2-mode-hook #'js2-refactor-mode))
+
+;; flycheck, eslint
+(use-package flycheck
+  :ensure t
+  :defer t
+  :init
+  (global-flycheck-mode)
+  ;; (add-hook 'js2-mode-hook 'flycheck-mode)
+  (setq flycheck-check-syntax-automatically '(mode-enabled save))
+  (setq-default flycheck-disabled-checkers '(javascript-jshint))
+  (setq flycheck-indication-mode 'left-fringe)
+  (defun my/use-eslint-from-node-modules ()
+    (let* ((root (locate-dominating-file
+                  (or (buffer-file-name) default-directory)
+                  "node_modules"))
+           (eslint (and root
+                        (expand-file-name "node_modules/eslint/bin/eslint.js"
+                                          root))))
+    (when (and eslint (file-executable-p eslint))
+      (setq-local flycheck-javascript-eslint-executable eslint))))
+  (add-hook 'flycheck-mode-hook #'my/use-eslint-from-node-modules))
 
 
 ;; json-mode
@@ -206,6 +228,10 @@
             (lambda ()
               (when (string= major-mode "web-mode")
                 (turn-off-fci-mode))))
+  (add-to-list 'web-mode-indentation-params '("lineup-args" . nil))
+  (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
+  (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
+  (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
   (setq sgml-basic-offset 2
         web-mode-markup-indent-offset 2
         web-mode-css-index-offset 2
