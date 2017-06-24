@@ -39,6 +39,7 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (display-time)
+(blink-cursor-mode -1)
 
 ;; backups
 (setq auto-save-default nil)
@@ -93,11 +94,11 @@
     (global-fci-mode 1)))
 
 ;; line numbers
-(use-package nlinum
-  :ensure t
-  :config
-  (setq nlinum-format "%d ")
-  (global-nlinum-mode))
+;; (use-package nlinum
+;;   :ensure t
+;;   :config
+;;   (setq nlinum-format "%d ")
+;;   (global-nlinum-mode))
 
 ;; theme
 (use-package base16-theme
@@ -293,13 +294,20 @@
 (use-package org
   :ensure t
   :mode ("\\.org\\'" . org-mode)
-  :bind (("C-c c" . org-capture))
+  :bind (("C-c c" . org-capture)
+         ("C-c r" . org-refile)
+         ("C-c a" . org-agenda))
   :diminish (org-mode . "org")
   :init (add-hook 'org-mode-hook (lambda () (nlinum-mode -1)))
   :config
+  (add-hook 'after-change-major-mode-hook
+          (lambda ()
+            (when (string= major-mode "org-mode")
+              (turn-off-fci-mode))))
   (progn
     (setq org-directory my-org-directory)
     (setq org-return-follows-link t)
+    (setq org-log-done 'time)
     (setq org-capture-templates
           '(("t" "Todo" entry (file+headline my-default-org-file "Inbox")
              "* TODO %^{Task}\n\n")

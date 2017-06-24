@@ -1,4 +1,5 @@
 vim/bundle/*
 emacs.d/elpa/*
 emacs.d/recentf
+emacs.d/bookmarks
 emacs.d/projectile-bookmarks.eld
