@@ -164,6 +164,8 @@
   (add-hook 'js-mode-hook #'smartparens-mode)
   (use-package smartparens-config)
   (smartparens-global-mode 1))
+  (sp-local-pair 'js-mode "{" nil :post-handlers '((my/newline-and-enter-parens "RET")))
+  (sp-local-pair 'js2-mode "{" nil :post-handlers '((my/newline-and-enter-parens "RET")))
 
 ;; js2-mode
 (use-package js2-mode
@@ -233,6 +235,7 @@
   (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
+  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
   (setq sgml-basic-offset 2
         web-mode-markup-indent-offset 2
         web-mode-css-index-offset 2
@@ -376,6 +379,13 @@
 
 (global-set-key (kbd "C-x >") (lambda () (interactive) (my/shift-right 2)))
 (global-set-key (kbd "C-x <") (lambda () (interactive) (my/shift-left 2)))
+
+(defun my/newline-and-enter-parens (&rest _ignored)
+  "Insert newline with certain parentheses"
+  (newline)
+  (indent-according-to-mode)
+  (forward-line -1)
+  (indent-according-to-mode))
 
 (defun my/reload-emacs-config ()
   "Reload emacs configuration"
