@@ -172,7 +172,7 @@
   :ensure t
   :defer t
   ;; :diminish (js2-mode)
-  :mode (("\\.js$" . js2-mode))
+  :mode (("\\.jsx?$" . js2-mode))
   :commands (js2-mode)
   :config
   (add-hook 'js-mode-hook 'js2-minor-mode)
@@ -187,6 +187,34 @@
   :config
   (js2r-add-keybindings-with-prefix "C-c r")
   (add-hook 'js2-mode-hook #'js2-refactor-mode))
+
+;; prettier
+(use-package prettier-js
+  :ensure t
+  :defer t
+  :bind ("C-c p" . "prettier-js")
+  :init
+  :config
+  (setq prettier-target-mode "js2-mode")
+  (setq prettier-js-args '(
+                           "--single-quote" "true"
+                           "--bracket-spacing" "true"
+                           "--trailing-comma" "none"
+                           ))
+  (defun my/use-prettier-from-node-modules ()
+    (let* ((root (locate-dominating-file
+                  (or (buffer-file-name) default-directory)
+                  "node_modules"))
+           (prettier (and root
+                        (expand-file-name "node_modules/.bin/prettier"
+                                          root))))
+    (when (and prettier (file-executable-p prettier))
+      (setq-local prettier-js-command prettier))))
+  (add-hook 'js-mode-hook 'my/use-prettier-from-node-modules)
+  (add-hook 'js2-mode-hook 'my/use-prettier-from-node-modules)
+  ;; (add-hook 'js2-mode-hook 'prettier-js-mode)
+  ;; (add-hook 'web-mode-hook 'prettier-js-mode)
+  )
 
 ;; flycheck, eslint
 (use-package flycheck
@@ -203,7 +231,7 @@
                   (or (buffer-file-name) default-directory)
                   "node_modules"))
            (eslint (and root
-                        (expand-file-name "node_modules/eslint/bin/eslint.js"
+                        (expand-file-name "node_modules/.bin/eslint"
                                           root))))
     (when (and eslint (file-executable-p eslint))
       (setq-local flycheck-javascript-eslint-executable eslint))))
