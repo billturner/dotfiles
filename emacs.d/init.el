@@ -203,20 +203,22 @@
                                           root))))
     (when (and prettier (file-executable-p prettier))
       (setq-local prettier-js-command prettier))))
-  (add-hook 'js2-mode-hook 'prettier-js-mode)
-  (add-hook 'js2-mode-hook #'my/use-prettier-from-node-modules)
-  (add-hook 'web-mode-hook 'prettier-js-mode)
-  (add-hook 'web-mode-hook #'my/use-prettier-from-node-modules)
-  ;; (remove-hook 'before-save-hook 'prettier-before-save)
-  (remove-hook 'before-save-hook 'prettier-js)
+  ;; (add-hook 'js2-mode-hook 'prettier-js-mode)
+  ;; (add-hook 'js2-mode-hook #'my/use-prettier-from-node-modules)
+  ;; (add-hook 'web-mode-hook 'prettier-js-mode)
+  ;; (add-hook 'web-mode-hook #'my/use-prettier-from-node-modules)
+  ;; (remove-hook 'before-save-hook 'prettier-js)
+  ;; remove-hook doesn't seem to work, so need to manually enable mode
   :config
-  ;; (setq prettier-target-mode "js2-mode")
   (setq prettier-js-args '(
                            "--single-quote" "true"
                            "--bracket-spacing" "true"
                            "--trailing-comma" "none"
                            ))
   )
+(with-eval-after-load 'prettier-js
+  (remove-hook 'before-save-hook 'prettier-js t)
+  (remove-hook 'before-save-hook #'prettier-js t))
 
 ;; flycheck, eslint
 (use-package flycheck
@@ -410,6 +412,20 @@
 (global-set-key (kbd "C-x >") (lambda () (interactive) (my/shift-right 2)))
 (global-set-key (kbd "C-x <") (lambda () (interactive) (my/shift-left 2)))
 
+;; quick-copy-line
+;; from https://www.emacswiki.org/emacs/CopyingWholeLines#toc7
+(defun my/quick-copy-line ()
+  "copy current line and jump to next line"
+  (interactive)
+  (let ((beg (line-beginning-position 1))
+        (end (line-beginning-position 2)))
+    (if (eq last-command 'quick-copy-line)
+        (kill-append (buffer-substring beg end) (< end beg))
+      (kill-new (buffer-substring beg end))))
+  (beginning-of-line 2))
+(global-set-key (kbd "C-c M-d") 'my/quick-copy-line)
+
+;; for javascript
 (defun my/newline-and-enter-parens (&rest _ignored)
   "Insert newline with certain parentheses"
   (newline)
