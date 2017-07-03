@@ -194,13 +194,6 @@
   :defer t
   :bind ("C-c p" . "prettier-js")
   :init
-  :config
-  (setq prettier-target-mode "js2-mode")
-  (setq prettier-js-args '(
-                           "--single-quote" "true"
-                           "--bracket-spacing" "true"
-                           "--trailing-comma" "none"
-                           ))
   (defun my/use-prettier-from-node-modules ()
     (let* ((root (locate-dominating-file
                   (or (buffer-file-name) default-directory)
@@ -210,10 +203,19 @@
                                           root))))
     (when (and prettier (file-executable-p prettier))
       (setq-local prettier-js-command prettier))))
-  (add-hook 'js-mode-hook 'my/use-prettier-from-node-modules)
-  (add-hook 'js2-mode-hook 'my/use-prettier-from-node-modules)
-  ;; (add-hook 'js2-mode-hook 'prettier-js-mode)
-  ;; (add-hook 'web-mode-hook 'prettier-js-mode)
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
+  (add-hook 'js2-mode-hook #'my/use-prettier-from-node-modules)
+  (add-hook 'web-mode-hook 'prettier-js-mode)
+  (add-hook 'web-mode-hook #'my/use-prettier-from-node-modules)
+  ;; (remove-hook 'before-save-hook 'prettier-before-save)
+  (remove-hook 'before-save-hook 'prettier-js)
+  :config
+  ;; (setq prettier-target-mode "js2-mode")
+  (setq prettier-js-args '(
+                           "--single-quote" "true"
+                           "--bracket-spacing" "true"
+                           "--trailing-comma" "none"
+                           ))
   )
 
 ;; flycheck, eslint
