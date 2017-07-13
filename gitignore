@@ -51,3 +51,4 @@ tramp
 /elpa/
 emacs.d/recentf
 emacs.d/projectile-bookmarks.eld
+emacs.d/eshell
