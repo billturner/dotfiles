@@ -40,7 +40,7 @@
   ;; (add-hook 'js2-mode-hook #'my/use-prettier-from-node-modules)
   ;; (add-hook 'web-mode-hook 'prettier-js-mode)
   ;; (add-hook 'web-mode-hook #'my/use-prettier-from-node-modules)
-  ;; (remove-hook 'before-save-hook 'prettier-js)
+  (remove-hook 'before-save-hook 'prettier-js)
   ;; remove-hook doesn't seem to work, so need to manually enable mode
   :config
   (setq prettier-js-args '(
