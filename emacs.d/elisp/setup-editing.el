@@ -46,7 +46,7 @@
 ;; smartparens
 (use-package smartparens
   :ensure t
-  :diminish (smartparens-mode . "sp")
+  :diminish (smartparens-mode . "Sp")
   :config
   (add-hook 'js-mode-hook #'smartparens-mode)
   (use-package smartparens-config)

@@ -17,8 +17,9 @@
   (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
-  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+;;  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
   (setq sgml-basic-offset 2
+        sgml-attribute-offset 2
         web-mode-markup-indent-offset 2
         web-mode-css-index-offset 2
         web-mode-code-indent-offset 2
