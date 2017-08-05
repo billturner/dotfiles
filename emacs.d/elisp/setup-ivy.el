@@ -17,7 +17,7 @@
   :bind ("M-x" . counsel-M-x))
 (use-package projectile
   :ensure t
-  :diminish (projectile-mode . "pr")
+  :diminish (projectile-mode . "Proj")
   :config
   (projectile-global-mode)
   (setq projectile-completion-system 'ivy)

@@ -14,9 +14,11 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; theme
-(use-package base16-theme
-  :ensure t
-  :init (load-theme 'base16-tomorrow-night t))
+(load-theme 'adwaita t)
+
+;; (use-package base16-theme
+;;   :ensure t
+;;   :init (load-theme 'base16-tomorrow-night t))
 
 ;; neotree
 (use-package neotree

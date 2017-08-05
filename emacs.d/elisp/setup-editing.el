@@ -27,14 +27,14 @@
   (add-hook 'font-lock-mode-hook 'hc-highlight-tabs))
 
 ;; fill-column-indicator
-(use-package fill-column-indicator
-  :ensure t
-  :init
-  (progn
-    (define-globalized-minor-mode global-fci-mode fci-mode
-      (lambda () (fci-mode 1)))
-    (setq-default fill-column 80)
-    (global-fci-mode 1)))
+;; (use-package fill-column-indicator
+;;   :ensure t
+;;   :init
+;;   (progn
+;;     (define-globalized-minor-mode global-fci-mode fci-mode
+;;       (lambda () (fci-mode 1)))
+;;     (setq-default fill-column 80)
+;;     (global-fci-mode 1)))
 
 ;; line numbers
 ;; (use-package nlinum
