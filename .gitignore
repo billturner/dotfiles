@@ -1,4 +1,6 @@
 vim/bundle/*
+vim/autoload/*
+vim/plugged/*
 emacs.d/elpa/*
 emacs.d/recentf
 emacs.d/bookmarks

@@ -24,11 +24,11 @@
    js2-cleanup-whitespace t
    js2-enter-indents-newline t
    js2-indent-on-enter-key t)
-  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+  (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode)))
 
-  (use-package rjsx-mode
-    :ensure t
-    :init
-    (add-to-list 'auto-mode-alist '("\\.jsx?$" . rjsx-mode))))
+(use-package rjsx-mode
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.jsx$" . rjsx-mode)))
 
 (provide 'setup-rjsx)

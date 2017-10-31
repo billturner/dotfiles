@@ -27,10 +27,11 @@
 (require 'setup-ivy)
 (require 'setup-git)
 ;; (require 'setup-javascript)
-(require 'setup-web)
+;; (require 'setup-web)
 (require 'setup-rjsx)
 ;; (require 'setup-ruby)
 (require 'setup-markdown)
 (require 'setup-org)
 ;; (require 'setup-lisp)
 (require 'setup-my-functions)
+

@@ -7,6 +7,9 @@
   :mode (("\\.md$" . markdown-mode)
          ("\\.markdown$" . markdown-mode)
          ("README\\.md$" . gfm-mode))
-  :commands (markdown-mode gfm-mode))
+  :commands (markdown-mode gfm-mode)
+  :config (progn
+            (add-hook 'markdown-mode-hook #'visual-line-mode))
+  )
 
 (provide 'setup-markdown)

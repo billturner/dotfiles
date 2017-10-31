@@ -1,54 +1,50 @@
 set nocompatible
 filetype off
 
-" Vundle config
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-" Vundle itself
-Plugin 'gmarik/Vundle.vim'
+" vim-plug config
+call plug#begin('~/.vim/plugged')
 
 " Git
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 " General coding
-Plugin 'scrooloose/syntastic'
-Plugin 'mtscout6/syntastic-local-eslint.vim'
+Plug 'scrooloose/syntastic'
+Plug 'mtscout6/syntastic-local-eslint.vim'
 
 " Javascript
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'pangloss/vim-javascript'
-Plugin 'burnettk/vim-angular'
-Plugin 'mxw/vim-jsx'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
+Plug 'isRuslan/vim-es6'
+Plug 'mxw/vim-jsx'
 
 " Ruby/Rails
-Plugin 'tpope/vim-rails'
-Plugin 'janx/vim-rubytest'
-Plugin 'nelstrom/vim-textobj-rubyblock'
+Plug 'tpope/vim-rails'
+Plug 'janx/vim-rubytest'
+Plug 'nelstrom/vim-textobj-rubyblock'
 
 " Design/Navigation
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'mileszs/ack.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'easymotion/vim-easymotion'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+Plug 'mileszs/ack.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'easymotion/vim-easymotion'
 
 " Snippets
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
 
 " General
-Plugin 'Raimondi/delimitMate'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'tpope/vim-endwise'
-Plugin 'kana/vim-textobj-user'
-Plugin 'tpope/vim-ragtag'
-Plugin 'tpope/vim-surround'
+Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
+Plug 'kana/vim-textobj-user'
+Plug 'tpope/vim-ragtag'
+Plug 'tpope/vim-surround'
 
 " Finish Vundle
-call vundle#end()
+call plug#end()
 
 filetype plugin indent on
 
@@ -122,6 +118,7 @@ nmap k gk
 nnoremap <Leader>ll :set list<CR>
 map <Leader>q <c-w>q
 cmap w!! w !sudo tee > /dev/null %  " write/save file with sudo
+set pastetoggle=<F2>
 
 " stop ex mode
 :nnoremap Q <Nop>
@@ -183,9 +180,6 @@ let g:ctrlp_clear_cache_on_exit=1
 let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode='r'
 let g:ctrlp_show_hidden=1
-
-" Nerdcommenter
-let g:NERDSpaceDelims=1
 
 " Nerdtree
 map <leader>n :NERDTreeToggle<CR>

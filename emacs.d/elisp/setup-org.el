@@ -23,6 +23,7 @@
           (lambda ()
             (when (string= major-mode "org-mode")
               (turn-off-fci-mode))))
+  (add-hook 'org-mode-hook 'visual-line-mode)
   (progn
     (setq org-directory my-org-directory)
     (setq org-return-follows-link t)
