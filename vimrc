@@ -43,7 +43,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-surround'
 
-" Finish Vundle
+" Finish vim-plug
 call plug#end()
 
 filetype plugin indent on
@@ -181,6 +181,14 @@ let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode='r'
 let g:ctrlp_show_hidden=1
 
+" if ripgrep is installed, let's use it
+if executable('rg')
+  let g:ctrlp_user_command = 'rg --files %s'
+  let g:ctrlp_use_caching = 0
+  let g:ctrlp_working_path_mode = 'ra'
+  let g:ctrlp_switch_buffer = 'et'
+endif
+
 " Nerdtree
 map <leader>n :NERDTreeToggle<CR>
 map <leader>f :NERDTreeFind<CR>
@@ -188,7 +196,7 @@ map <leader>f :NERDTreeFind<CR>
 let g:NERDTreeWinPos="left"
 let g:NERDTreeShowHidden=1
 let g:NERDTreeMinimalUI=1
-let g:NERDTreeWinSize=40
+let g:NERDTreeWinSize=30
 au Filetype nerdtree setlocal nolist
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -206,8 +214,10 @@ let g:rubytest_cmd_testcase = "bundle exec spring testunit %p -n '/%c/'"
 let g:rubytest_cmd_spec = "bundle exec rspec '%p'"
 let g:rubytest_cmd_example = "bundle exec rspec '%p' -l '%c'"
 
-" Ack/Silver Searcher
-if executable('ag')
+" Ack/Silver Searcher/ripgrep
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep --no-heading'
+elseif executable('ag')
   let g:ackprg = 'ag --nocolor --nogroup'
 endif
 nnoremap <leader>a :Ack<Space>

@@ -50,3 +50,9 @@ The below assume that `<Leader>` is set to `,`.
 * `<F2>` - toggle paste/nopaste
 * `,t` - CtrlP - files
 * `,b` - CtrlP - buffers
+* `,a` - Ack prompt for search (using rg, ag, or ack)
+* `,A` - Search word under cursor via Ack
+* `,n` - Open NerdTree file browser
+* `,f` - Open NerdTree file browser, with current file shown
+* `gc` - toggle comments on highlighted block (in Visual Mode)
+* `gcc` - toggle comment on current line
