@@ -57,11 +57,8 @@ let mapleader=","
 
 " colorscheme
 if &t_Co >= 256 || has("gui_running")
-  " let base16colorspace=256  " Access colors present in 256 colorspace"
-  " set background=light
-  " colorscheme base16-tomorrow
-  set background=dark
-  colorscheme base16-solarized-dark
+  set background=light
+  colorscheme base16-tomorrow
 endif
 
 " filetype/encoding
@@ -203,7 +200,9 @@ let g:NERDTreeMinimalUI=1
 let g:NERDTreeWinSize=30
 au Filetype nerdtree setlocal nolist
 
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" Don't just leave Nerdtree as only window
+" via: https://stackoverflow.com/a/4319165
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " vim-rails
 let g:rails_statusline=0
