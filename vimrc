@@ -29,6 +29,7 @@ Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'easymotion/vim-easymotion'
+Plug 'chriskempson/base16-vim'
 
 " Snippets
 Plug 'MarcWeber/vim-addon-mw-utils'
@@ -56,8 +57,11 @@ let mapleader=","
 
 " colorscheme
 if &t_Co >= 256 || has("gui_running")
+  " let base16colorspace=256  " Access colors present in 256 colorspace"
+  " set background=light
+  " colorscheme base16-tomorrow
   set background=dark
-  colorscheme base16-tomorrow
+  colorscheme base16-solarized-dark
 endif
 
 " filetype/encoding
