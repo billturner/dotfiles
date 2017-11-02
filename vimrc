@@ -17,6 +17,9 @@ Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'isRuslan/vim-es6'
 Plug 'mxw/vim-jsx'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 
 " Ruby/Rails
 Plug 'tpope/vim-rails'
@@ -161,6 +164,11 @@ endif
 "
 " PLUGIN CONFIGS
 "
+" vim-prettier (defaults):
+let g:prettier#config#print_width = 100
+let g:prettier#config#bracket_spacing = 'false'
+let g:prettier#config#trailing_comma = 'none'
+
 " syntastic:
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_ruby_checkers = ['rubocop', 'mri']
