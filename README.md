@@ -13,7 +13,7 @@ Initial Mac setup
 -----------------
 
 1. Install homebrew, via [their instructions](http://brew.sh/).
-2. Install homebrew packages: `brew install fzf ripgrep vim ctags the_silver_searcher chruby ruby-install`
+2. Install homebrew packages: `brew install ripgrep vim ctags the_silver_searcher chruby ruby-install`
 
 Initial Ubuntu setup
 --------------------
@@ -34,7 +34,7 @@ If you have a file (like a `.vimrc`) already in your root directory, it will be 
 
 **Vim**
 
-Install the vim-plug plugin:
+Install the `vim-plug plugin`:
 
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim 
