@@ -16,6 +16,7 @@ Plug 'mtscout6/syntastic-local-eslint.vim'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'isRuslan/vim-es6'
+Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
@@ -168,6 +169,12 @@ endif
 let g:prettier#config#print_width = 100
 let g:prettier#config#bracket_spacing = 'false'
 let g:prettier#config#trailing_comma = 'none'
+
+" vim-javascript:
+let g:javascript_plugin_flow = 1
+
+" vim-jsx:
+let g:jsx_ext_required = 0
 
 " syntastic:
 let g:syntastic_javascript_checkers = ['eslint']
