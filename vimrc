@@ -159,7 +159,7 @@ if has("autocmd")
   autocmd BufNewFile,BufRead *.ts,*.json,*.es6,*.jsx set ft=javascript
   " markdown
   autocmd BufNewFile,BufRead *.markdown,*.mkd,*.md set ft=markdown
-  autocmd FileType markdown setlocal wrap linebreak nolist
+  autocmd FileType markdown setlocal wrap linebreak nonumber norelativenumber nolist colorcolumn=
 endif
 
 "
@@ -204,6 +204,9 @@ if executable('rg')
   let g:ctrlp_working_path_mode = 'ra'
   let g:ctrlp_switch_buffer = 'et'
 endif
+
+" delimitMate
+let g:delimitMate_expand_cr = 1
 
 " Nerdtree
 map <leader>n :NERDTreeToggle<CR>
