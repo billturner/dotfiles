@@ -7,6 +7,7 @@ call plug#begin('~/.vim/plugged')
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'idanarye/vim-merginal'
 
 " General coding
 Plug 'scrooloose/syntastic'
