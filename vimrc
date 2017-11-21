@@ -129,9 +129,9 @@ set pastetoggle=<F2>
 :nnoremap Q <Nop>
 
 set hidden
-if exists("&colorcolumn")
-  set colorcolumn=80,120
-endif
+" if exists("&colorcolumn")
+"   set colorcolumn=80,120
+" endif
 set number
 set relativenumber
 " nnoremap <leader><leader> <C-^>
