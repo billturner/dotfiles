@@ -112,9 +112,21 @@ set ignorecase
 set smartcase
 set wildmenu
 set wildmode=list:longest,list:full
-set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.pdf,.DS_Store
+
+" ignore image and doc files
+set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.pdf,*.doc,*.docx,*.xls,*.xlsx
+" ignore font files
+set wildignore+=*.ttf,*.otf,*.woff,*.woff2,*.eot
+" ignore annoying mac files
+set wildignore+=.DS_Store,.localized
+" ignore repository configs
 set wildignore+=.hg,.svn,.git
+" ignore logfiles in general
 set wildignore+=*.log
+" ignore build directories
+set wildignore+=*/build/**,*/dist/**,*/target/**
+" ignore other things
+set wildignore+=*/vendor/*,*/node_modules/**,*/bower_components/**,*/tmp/**,*/coverage/**
 
 " navigation/editing helpers
 imap <c-e> <c-o>$
@@ -125,6 +137,11 @@ nnoremap <Leader>ll :set list<CR>
 map <Leader>q <c-w>q
 cmap w!! w !sudo tee > /dev/null %  " write/save file with sudo
 set pastetoggle=<F2>
+
+" folding
+" set foldmethod=indent
+" set foldminlines=3
+" set foldlevelstart=1
 
 " stop ex mode
 :nnoremap Q <Nop>
@@ -193,7 +210,6 @@ let g:syntastic_html_tidy_ignore_errors = ["is not recognized!", "discarding une
 nnoremap <Leader>t :CtrlP<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
 
-let g:ctrlp_custom_ignore = '_site\|dist\|bower_components\|build\|bundle\|tmp\|coverage\|vendor\|node_modules'
 let g:ctrlp_clear_cache_on_exit=1
 let g:ctrlp_max_depth=40
 let g:ctrlp_working_path_mode='r'
@@ -201,10 +217,10 @@ let g:ctrlp_show_hidden=1
 
 " if ripgrep is installed, let's use it
 if executable('rg')
-  let g:ctrlp_user_command = 'rg --files %s'
+  set grepprg=rg\ --color=never
+  let g:ackprg = 'rg --vimgrep'
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
   let g:ctrlp_use_caching = 0
-  let g:ctrlp_working_path_mode = 'ra'
-  let g:ctrlp_switch_buffer = 'et'
 endif
 
 " delimitMate
@@ -232,8 +248,8 @@ nmap <Leader>y <Plug>RubyTestRun
 nmap <Leader>Y <Plug>RubyFileRun
 
 let g:rubytest_in_quickfix = 0
-let g:rubytest_cmd_test = "bundle exec spring testunit %p"
-let g:rubytest_cmd_testcase = "bundle exec spring testunit %p -n '/%c/'"
+let g:rubytest_cmd_test = "ruby -I test %p"
+let g:rubytest_cmd_testcase = "ruby -I test %p -n '/%c/'"
 let g:rubytest_cmd_spec = "bundle exec rspec '%p'"
 let g:rubytest_cmd_example = "bundle exec rspec '%p' -l '%c'"
 
