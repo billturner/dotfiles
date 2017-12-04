@@ -133,10 +133,10 @@ imap <c-e> <c-o>$
 imap <c-a> <c-o>^
 nmap j gj
 nmap k gk
-nnoremap <Leader>ll :set list<CR>
 map <Leader>q <c-w>q
 cmap w!! w !sudo tee > /dev/null %  " write/save file with sudo
 set pastetoggle=<F2>
+nnoremap <Leader>ll :setlocal list! \| setlocal relativenumber! \| setlocal number!<CR>
 
 " folding
 " set foldmethod=indent
@@ -172,12 +172,13 @@ command! Jsonf %!python -m json.tool
 
 " Other filetypes
 if has("autocmd")
-  " various ruby file types
-  autocmd BufNewFile,BufRead {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} set ft=ruby
-  " javascript formatting
-  autocmd BufNewFile,BufRead *.ts,*.json,*.es6,*.jsx set ft=javascript
+  " ruby
+  autocmd BufNewFile,BufRead {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} setlocal ft=ruby
+  " javascript
+  autocmd BufNewFile,BufRead *.ts,*.json,*.es6,*.jsx setlocal ft=javascript
+  autocmd BufNewFile,BufRead *.vue setlocal filetype=vue.html.javascript.css
   " markdown
-  autocmd BufNewFile,BufRead *.markdown,*.mkd,*.md set ft=markdown
+  autocmd BufNewFile,BufRead *.markdown,*.mkd,*.md setlocal ft=markdown
   autocmd FileType markdown setlocal wrap linebreak nonumber norelativenumber nolist colorcolumn=
 endif
 
