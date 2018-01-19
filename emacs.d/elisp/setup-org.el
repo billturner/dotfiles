@@ -4,6 +4,7 @@
 (setq my-org-directory "~/src/org")
 (setq my-default-org-file "~/src/org/organizer.org")
 (setq my-work-org-file "~/src/org/work.org")
+(setq my-work-devlog-org-file "~/src/org/devlog-work.org")
 
 ;; org-mode
 (global-set-key (kbd "C-c o")
@@ -17,12 +18,7 @@
          ("C-c r" . org-refile)
          ("C-c a" . org-agenda))
   :diminish (org-mode . "org")
-  :init (add-hook 'org-mode-hook (lambda () (nlinum-mode -1)))
   :config
-  (add-hook 'after-change-major-mode-hook
-          (lambda ()
-            (when (string= major-mode "org-mode")
-              (turn-off-fci-mode))))
   (add-hook 'org-mode-hook 'visual-line-mode)
   (progn
     (setq org-directory my-org-directory)
@@ -35,6 +31,8 @@
              "* %^{Idea} / %t\n\n")
             ("w" "Work Todo" entry (file+headline my-work-org-file "Inbox")
              "* TODO %^{Task}\n\n")
+            ("l" "Work Devlog" entry (file+datetree my-work-devlog-org-file)
+             "* %^{Summary}\n\n")
             )
           )
     (setq org-todo-keywords

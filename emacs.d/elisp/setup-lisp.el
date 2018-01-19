@@ -6,7 +6,7 @@
   :defer t
   :init
   (setq inferior-lisp-program "/usr/local/bin/sbcl")
-  (load (expand-file-name "~/quicklisp/slime-helper.el"))
+  (load (expand-file-name "~/.emacs.d/quicklisp/slime-helper.el"))
   :config
   (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
   (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t))))

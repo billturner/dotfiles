@@ -16,6 +16,16 @@
 ;; theme
 (load-theme 'adwaita t)
 
+;; setup initial position and size
+(when window-system
+  (set-frame-position (selected-frame) 50 75)
+  (set-frame-size (selected-frame) 130 45))
+
+;; setup font
+;; Hack font => http://sourcefoundry.org/hack/
+(when window-system
+  (set-face-attribute 'default nil :font "Hack" :height 120))
+
 ;; (use-package base16-theme
 ;;   :ensure t
 ;;   :init (load-theme 'base16-tomorrow-night t))

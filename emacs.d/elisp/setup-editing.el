@@ -45,16 +45,16 @@
 ;;   (global-nlinum-mode))
 
 ;; smartparens
-(use-package smartparens
-  :ensure t
-  :diminish (smartparens-mode . "Sp")
-  :config
-  (add-hook 'js-mode-hook #'smartparens-mode)
-  (use-package smartparens-config)
-  (smartparens-global-mode 1)
-  (sp-local-pair 'js-mode "{" nil :post-handlers '((my/newline-and-enter-parens "RET")))
-  (sp-local-pair 'js2-mode "{" nil :post-handlers '((my/newline-and-enter-parens "RET")))
-)
+;; (use-package smartparens
+;;   :ensure t
+;;   :diminish (smartparens-mode . "Sp")
+;;   :config
+;;   (add-hook 'js-mode-hook #'smartparens-mode)
+;;   (use-package smartparens-config)
+;;   (smartparens-global-mode 1)
+;;   (sp-local-pair 'js-mode "{" nil :post-handlers '((my/newline-and-enter-parens "RET")))
+;;   (sp-local-pair 'js2-mode "{" nil :post-handlers '((my/newline-and-enter-parens "RET")))
+;; )
 
 ;; backups
 (setq auto-save-default nil)
