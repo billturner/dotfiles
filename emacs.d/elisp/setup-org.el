@@ -36,17 +36,14 @@
              ("w" "Work Todo" entry (file+headline my-work-org-file "Inbox")
              "* TODO %^{Task}\n")
             ("l" "Work Devlog" entry (file+datetree my-work-devlog-org-file)
-             "* %^{Summary}\n%?")
-            ("c" "CP: Towards" entry (file+datetree my-choice-point-org-file)
-             "* TOWARDS %^{Action}\n")
-            ("a" "CP: Away" entry (file+datetree my-choice-point-org-file)
-             "* AWAY %^{Action}\n")
+             "* %^{Summary}\n\n%?")
+            ("c" "Choice Point Action" entry (file+datetree my-choice-point-org-file)
+             "* %^{Action} %^g\n")
             )
           )
     (setq org-todo-keywords
           '(
             (sequence "TODO(t)" "NEXT(n)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")
-            (sequence "TOWARDS(o)" "AWAY(a)")
             ))
     (setq org-todo-keyword-faces
           '(("TODO" . (:foreground "orangered" :weight bold))
@@ -54,11 +51,13 @@
             ("WAITING" . (:foreground "lightgoldenrod" :weight bold))
             ("DONE" . (:foreground "forestgreen" :weight bold))
             ("CANCELLED" . (:foreground "forestgreen" :weight bold))
-            ("TOWARDS" . (:foreground "forestgreen" :weight bold))
-            ("AWAY" . (:foreground "orangered" :weight bold))
             ))
     (setq org-tag-alist
           '(
+            (:startgroup . nil)
+            ("towards" . ?t)
+            ("away" . ?a)
+            (:endgroup . nil)
             (:startgroup . nil)
             ("@personal" . ?p)
             ("@work" . ?w)
@@ -69,6 +68,8 @@
           )
     (setq org-tag-faces
           '(
+            ("towards" . (:foreground "forestgreen" :weight bold))
+            ("away" . (:foreground "orangered" :weight bold))
             ("@personal" . (:foreground "forestgreen" :weight bold))
             )
           )
