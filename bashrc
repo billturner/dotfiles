@@ -90,23 +90,13 @@ COLOR_BLUE='\[\e[34m\]'
 COLOR_RESET='\[\e[0m\]'
 
 # git branch
-function _git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
-}
-
-function _ruby_version {
-  if (which ruby | grep -q ruby); then
-    ruby -v | cut -d" " -f2 | sed -e 's/p[0-9]*//g'
+function _current_git_branch {
+  local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null);
+  if [[ -n $branch ]];then
+    echo " ($branch)"
   fi
 }
-
-function _node_version {
-  if (nvm | grep -q nvm); then
-    nvm current | sed -e 's/^v//' -e 's/none/-/'
-  fi
-}
-
-export PS1="\u@\h:\w $COLOR_BLUE"[N@"\$(_node_version)"]"$COLOR_RESET$COLOR_BLUE"[R@"\$(_ruby_version)"]"$COLOR_RESET$COLOR_BLUE"[G@"\$(_git_branch)"]"$COLOR_RESET$ "
+export PS1="\u@\h:\w$COLOR_BLUE""\$(_current_git_branch)""$COLOR_RESET$ "
 
 # include a personal and work rc files if found
 if [ -f ~/.personal.bashrc ]; then source ~/.personal.bashrc ; fi
