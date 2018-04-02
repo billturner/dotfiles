@@ -62,8 +62,8 @@ let mapleader=","
 
 " colorscheme
 if &t_Co >= 256 || has("gui_running")
-  set background=light
-  colorscheme base16-tomorrow
+  set background=dark
+  colorscheme base16-tomorrow-night
 endif
 
 " filetype/encoding

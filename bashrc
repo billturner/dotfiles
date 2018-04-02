@@ -10,6 +10,7 @@ export AUTOFEATURE=true
 export TERM="screen-256color"
 export NVM_DIR=~/.nvm
 export ANDROID_HOME=/usr/local/opt/android-sdk
+export RUBYOPT="-W0"
 
 shopt -s histappend
 
