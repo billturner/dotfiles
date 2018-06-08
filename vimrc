@@ -74,6 +74,10 @@ set fileencoding=utf-8
 set termencoding=utf-8
 scriptencoding utf-8
 
+" code folding
+set foldmethod=indent
+set foldlevel=99
+
 " tabs
 set autoindent
 set nowrap
@@ -179,6 +183,7 @@ if has("autocmd")
   " markdown
   autocmd BufNewFile,BufRead *.markdown,*.mkd,*.md setlocal ft=markdown
   autocmd FileType markdown setlocal wrap linebreak nonumber norelativenumber nolist colorcolumn=
+  autocmd FileType python setlocal shiftwidth=4 tabstop=4
 endif
 
 "
@@ -196,6 +201,7 @@ let g:ale_linters = {
 \}
 let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 0
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_ruby_rubocop_options = '--display-cop-names --rails'
 let g:ale_javascript_eslint_use_global = 0
 let g:ale_echo_msg_format = '[%linter%]: %s'
