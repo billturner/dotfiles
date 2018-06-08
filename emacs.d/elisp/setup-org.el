@@ -21,7 +21,6 @@
   :bind (("C-c c" . org-capture)
          ("C-c r" . org-refile)
          ("C-c a" . org-agenda))
-  :diminish (org-mode . "org")
   :config
   (add-hook 'org-mode-hook 'visual-line-mode)
   (progn

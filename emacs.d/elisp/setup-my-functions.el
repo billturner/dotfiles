@@ -13,6 +13,12 @@
         (next-logical-line)))
 (global-set-key (kbd "M-;") 'my/comment-or-uncomment-region-or-line)
 
+(defun my/previous-buffer ()
+  "Switch to previously open buffer / back and forth"
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
+(global-set-key (kbd "C-^") 'my/previous-buffer)
+
 (defun my/shift-text (distance)
   (if (use-region-p)
       (let ((mark (mark)))

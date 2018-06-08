@@ -9,9 +9,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'idanarye/vim-merginal'
 
-" General coding
-Plug 'scrooloose/syntastic'
-Plug 'mtscout6/syntastic-local-eslint.vim'
+" Syntax checking
+Plug 'w0rp/ale'
 
 " Javascript
 Plug 'jelera/vim-javascript-syntax'
@@ -19,9 +18,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'isRuslan/vim-es6'
 Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
+" Plug 'prettier/vim-prettier', {
+"   \ 'do': 'yarn install',
+"   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 
 " Ruby/Rails
 Plug 'tpope/vim-rails'
@@ -186,26 +185,26 @@ endif
 " PLUGIN CONFIGS
 "
 " vim-prettier (defaults):
-let g:prettier#config#print_width = 100
-let g:prettier#config#bracket_spacing = 'false'
-let g:prettier#config#trailing_comma = 'none'
+" let g:prettier#config#print_width = 100
+" let g:prettier#config#bracket_spacing = 'false'
+" let g:prettier#config#trailing_comma = 'none'
+
+" ale:
+let g:ale_linters = {
+\ 'javascript': ['eslint'],
+\ 'ruby': ['rubocop', 'ruby']
+\}
+let g:ale_lint_on_save = 1
+let g:ale_fix_on_save = 0
+let g:ale_ruby_rubocop_options = '--display-cop-names --rails'
+let g:ale_javascript_eslint_use_global = 0
+let g:ale_echo_msg_format = '[%linter%]: %s'
 
 " vim-javascript:
 let g:javascript_plugin_flow = 1
 
 " vim-jsx:
 let g:jsx_ext_required = 0
-
-" syntastic:
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_ruby_checkers = ['rubocop', 'mri']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_loc_list_height = 5
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_html_tidy_ignore_errors = ["is not recognized!", "discarding unexpected", " proprietary attribute ", "unescaped &"]
-" let g:syntastic_eruby_ruby_quiet_messages = {'regex': 'possibly useless use of a variable in void context'}
 
 " ctrlp:
 nnoremap <Leader>t :CtrlP<CR>

@@ -4,7 +4,6 @@
 (use-package js2-mode
   :ensure t
   :defer t
-  ;; :diminish (js2-mode)
   :mode (("\\.jsx?$" . js2-mode))
   :commands (js2-mode)
   :config
@@ -79,7 +78,6 @@
 (use-package json-mode
   :ensure t
   :defer t
-  :diminish (json-mode . "json")
   :mode (("\\.json\\'" . json-mode))
   :commands (json-mode))
 

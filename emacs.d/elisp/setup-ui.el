@@ -13,9 +13,6 @@
 ;; use y and n
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; theme
-(load-theme 'adwaita t)
-
 ;; setup initial position and size
 (when window-system
   (set-frame-position (selected-frame) 50 75)
@@ -26,9 +23,10 @@
 (when window-system
   (set-face-attribute 'default nil :font "Hack" :height 120))
 
-;; (use-package base16-theme
-;;   :ensure t
-;;   :init (load-theme 'base16-tomorrow-night t))
+(use-package base16-theme
+  :ensure t
+  :config
+  (load-theme 'base16-tomorrow-night t))
 
 ;; neotree
 (use-package neotree

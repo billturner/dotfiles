@@ -4,7 +4,6 @@
 (use-package web-mode
   :ensure t
   :defer t
-  :diminish (web-mode . "web")
   :mode (("\\.html?\\'" . web-mode)
          ("\\.erb\\'" . web-mode)
          ("\\.mustache\\'" . web-mode))
@@ -17,7 +16,6 @@
   (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
   (add-to-list 'web-mode-indentation-params '("lineup-ternary" . nil))
-;;  (add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
   (setq sgml-basic-offset 2
         sgml-attribute-offset 2
         web-mode-markup-indent-offset 2
@@ -30,7 +28,6 @@
 (use-package scss-mode
   :ensure t
   :defer t
-  :diminish (scss-mode . "scss")
   :mode (("\\.scss$" . scss-mode))
   :config
   (setq scss-compile-at-save nil
