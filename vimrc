@@ -75,8 +75,10 @@ set termencoding=utf-8
 scriptencoding utf-8
 
 " code folding
-set foldmethod=indent
+set foldmethod=syntax
 set foldlevel=99
+nnoremap <Space> za
+vnoremap <Space> za
 
 " tabs
 set autoindent

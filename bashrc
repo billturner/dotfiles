@@ -43,11 +43,6 @@ alias gnew="git ls-files -o --exclude-standard | xargs git add"
 alias gbr="git br"
 alias gbrr="git br -a"
 
-# git flow aliases
-alias gffs="git flow feature start"
-alias gfff="git flow feature finish"
-alias gffr="git flow feature rebase"
-
 # nvm aliases
 alias nu="nvm use"
 alias ni="nvm install"
@@ -61,13 +56,10 @@ alias brake="bundle exec rake"
 alias brr="brake routes"
 
 # docker aliases
-alias dm="docker-machine"
-alias dms="docker-machine start"
-alias dmst="docker-machine status"
 alias dk="docker"
 
 # various aliases
-alias pubkey="cat ~/.ssh/id_dsa.pub | pbcopy"
+alias pubkey="cat ~/.ssh/id_rsa.pub | pbcopy"
 alias pyhttp="python -m SimpleHTTPServer"
 alias em="/usr/local/Cellar/emacs/25.2/Emacs.app/Contents/MacOS/Emacs -nw"
 
