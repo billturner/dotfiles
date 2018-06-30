@@ -258,8 +258,8 @@ nmap <Leader>Y <Plug>RubyFileRun
 let g:rubytest_in_quickfix = 0
 let g:rubytest_cmd_test = "ruby -I test %p"
 let g:rubytest_cmd_testcase = "ruby -I test %p -n '/%c/'"
-let g:rubytest_cmd_spec = "bundle exec rspec '%p'"
-let g:rubytest_cmd_example = "bundle exec rspec '%p' -l '%c'"
+let g:rubytest_cmd_spec = "bundle exec rspec '%p' --format progress"
+let g:rubytest_cmd_example = "bundle exec rspec '%p':'%c' --format progress"
 
 " Ack/Silver Searcher/ripgrep
 if executable('rg')

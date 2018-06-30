@@ -1,6 +1,6 @@
 # ENV variables
 export GEM_EDITOR="vim"
-export PATH="/usr/local/go/bin:/usr/local/bin:/usr/local/share/npm/bin:$HOME/.rvm/bin:/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:/usr/local/share/npm/bin:$HOME/.rvm/bin:/usr/local/sbin:$PATH"
 export LC_CTYPE=en_US.UTF-8
 export EDITOR=vim
 export EVENT_NOKQUEUE=1
@@ -8,9 +8,7 @@ export HISTCONTROL=erasedups
 export ARCHFLAGS='-arch x86_64'
 export AUTOFEATURE=true
 export TERM="screen-256color"
-export NVM_DIR=~/.nvm
-export ANDROID_HOME=/usr/local/opt/android-sdk
-export RUBYOPT="-W0"
+# export RUBYOPT="-W0"
 
 shopt -s histappend
 
@@ -63,6 +61,9 @@ alias pubkey="cat ~/.ssh/id_rsa.pub | pbcopy"
 alias pyhttp="python -m SimpleHTTPServer"
 alias em="/usr/local/Cellar/emacs/25.2/Emacs.app/Contents/MacOS/Emacs -nw"
 
+# for reassignment
+alias vim="nvim"
+
 # for fat fingers
 alias bim="vim"
 
@@ -93,3 +94,5 @@ export PS1="\u@\h:\w$COLOR_BLUE""\$(_current_git_branch)""$COLOR_RESET$ "
 # include a personal and work rc files if found
 if [ -f ~/.personal.bashrc ]; then source ~/.personal.bashrc ; fi
 if [ -f ~/.work.bashrc ]; then source ~/.work.bashrc ; fi
+
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

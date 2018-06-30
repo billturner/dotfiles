@@ -6,9 +6,7 @@
 #   source /usr/local/share/chruby/auto.sh
 # fi
 export NVM_DIR="$HOME/.nvm"
-if [ -f /usr/local/opt/nvm/nvm.sh ]; then
-  source /usr/local/opt/nvm/nvm.sh
-fi
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 if [ -f ~/.bashrc ]; then source ~/.bashrc ; fi
 
