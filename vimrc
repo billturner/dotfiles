@@ -47,6 +47,7 @@ Plug 'tpope/vim-endwise'
 Plug 'kana/vim-textobj-user'
 Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-surround'
+Plug 'tommcdo/vim-lion'
 
 " Finish vim-plug
 call plug#end()
@@ -62,7 +63,7 @@ let mapleader=","
 " colorscheme
 if &t_Co >= 256 || has("gui_running")
   set background=dark
-  colorscheme base16-tomorrow-night
+  colorscheme base16-oceanicnext
 endif
 
 " filetype/encoding
@@ -207,6 +208,7 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_ruby_rubocop_options = '--display-cop-names --rails'
 let g:ale_javascript_eslint_use_global = 0
 let g:ale_echo_msg_format = '[%linter%]: %s'
+let g:ale_set_highlights = 0
 
 " vim-javascript:
 let g:javascript_plugin_flow = 1

@@ -1,0 +1,57 @@
+# rspec
+snippet describe
+	describe '${1:statement}' do
+		${2}
+	end
+snippet desc
+	describe '${1:statement}' do
+		${2}
+	end
+snippet it
+	it '${1:statement}' do
+		${2}
+	end
+snippet before
+	before do
+		${1}
+	end
+snippet after
+	after do
+		${1}
+	end
+snippet skip
+	skip '${1:reason}'
+snippet pending
+	pending '${1:reason}'
+snippet let
+	let(:${1}) {
+		${2}
+	}
+snippet subject
+	subject { ${1} }
+snippet expect
+	expect(${1}).to ${2}
+snippet expect!
+	expect(${1}).to_not ${2}
+snippet expect{
+	expect{
+		${1}
+	}.to ${2}
+snippet expect{!
+	expect{
+		${1}
+	}.to_not ${2}
+
+# minitest
+snippet test
+	test '${1}' do
+		${2}
+	end
+snippet setup
+	def setup
+		${1}
+	end
+snippet teardown
+	def teardown
+		${1}
+	end

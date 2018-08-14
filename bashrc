@@ -62,7 +62,7 @@ alias pyhttp="python -m SimpleHTTPServer"
 alias em="/usr/local/Cellar/emacs/25.2/Emacs.app/Contents/MacOS/Emacs -nw"
 
 # for reassignment
-alias vim="nvim"
+# alias vim="nvim"
 
 # for fat fingers
 alias bim="vim"

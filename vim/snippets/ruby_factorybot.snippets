@@ -1,0 +1,16 @@
+snippet fbd
+	FactoryBot.define do
+		${1}
+	end
+snippet fac
+	factory :${1:model} do
+		${2}
+	end
+snippet trait
+	trait :${1:model} do
+		${2}
+	end
+snippet seq
+	sequence :${1:attribute} do |n|
+		"${2:text} #{n}"
+	end
