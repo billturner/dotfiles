@@ -40,6 +40,7 @@ alias gp="git pull"
 alias gnew="git ls-files -o --exclude-standard | xargs git add"
 alias gbr="git br"
 alias gbrr="git br -a"
+alias gl="git log --oneline --graph --decorate --all"
 
 # nvm aliases
 alias nu="nvm use"

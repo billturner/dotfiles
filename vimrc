@@ -18,9 +18,6 @@ Plug 'pangloss/vim-javascript'
 Plug 'isRuslan/vim-es6'
 Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
-" Plug 'prettier/vim-prettier', {
-"   \ 'do': 'yarn install',
-"   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql'] }
 
 " Ruby/Rails
 Plug 'tpope/vim-rails'
@@ -199,9 +196,10 @@ endif
 
 " ale:
 let g:ale_linters = {
-\ 'javascript': ['eslint'],
+\ 'javascript': ['eslint', 'prettier'],
 \ 'ruby': ['rubocop', 'ruby']
 \}
+let g:ale_set_highlights = 0
 let g:ale_lint_on_save = 1
 let g:ale_fix_on_save = 0
 let g:ale_lint_on_text_changed = 'never'
@@ -260,8 +258,8 @@ nmap <Leader>Y <Plug>RubyFileRun
 let g:rubytest_in_quickfix = 0
 let g:rubytest_cmd_test = "ruby -I test %p"
 let g:rubytest_cmd_testcase = "ruby -I test %p -n '/%c/'"
-let g:rubytest_cmd_spec = "bundle exec rspec '%p' --format progress"
-let g:rubytest_cmd_example = "bundle exec rspec '%p':'%c' --format progress"
+let g:rubytest_cmd_spec = "SKIP_SIMPLECOV=true bundle exec rspec '%p' --format progress"
+let g:rubytest_cmd_example = "SKIP_SIMPLECOV=true bundle exec rspec '%p':'%c' --format progress"
 
 " Ack/Silver Searcher/ripgrep
 if executable('rg')
@@ -269,8 +267,8 @@ if executable('rg')
 elseif executable('ag')
   let g:ackprg = 'ag --nocolor --nogroup'
 endif
-nnoremap <leader>a :Ack<Space>
-nnoremap <Leader>A :Ack "<C-r><C-w>"<CR>
+nnoremap <leader>a :Ack!<Space>
+nnoremap <Leader>A :Ack! "<C-r><C-w>"<CR>
 
 " vim-gitgutter
 let g:gitgutter_realtime = 0
