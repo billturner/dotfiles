@@ -5,6 +5,7 @@ tags
 personalrc
 .watchr
 bootstrap.rake
+/lib/tasks/bootstrap.rake
 config/application.yml
 vim/bundle
 .ruby-version

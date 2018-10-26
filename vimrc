@@ -18,6 +18,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'isRuslan/vim-es6'
 Plug 'elzr/vim-json'
 Plug 'mxw/vim-jsx'
+Plug 'kchmck/vim-coffee-script'
 
 " Ruby/Rails
 Plug 'tpope/vim-rails'
@@ -140,6 +141,7 @@ map <Leader>q <c-w>q
 cmap w!! w !sudo tee > /dev/null %  " write/save file with sudo
 set pastetoggle=<F2>
 nnoremap <Leader>ll :setlocal list! \| setlocal relativenumber! \| setlocal number!<CR>
+inoremap jk <esc>
 
 " folding
 " set foldmethod=indent
