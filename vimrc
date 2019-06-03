@@ -221,15 +221,23 @@ nnoremap <Leader>t :CtrlP<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
 
 let g:ctrlp_clear_cache_on_exit=1
-let g:ctrlp_max_depth=40
-let g:ctrlp_working_path_mode='r'
+let g:ctrlp_max_depth=100
+let g:ctrlp_working_path_mode=''
 let g:ctrlp_show_hidden=1
+let g:ctrlp_max_files=0
 
 " if ripgrep is installed, let's use it
-if executable('rg')
-  set grepprg=rg\ --color=never
-  let g:ackprg = 'rg --vimgrep'
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+" if executable('rg')
+"   set grepprg=rg\ --color=never
+"   let g:ackprg = 'rg --vimgrep'
+"   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+"   let g:ctrlp_use_caching = 0
+" endif
+
+" let us use ag again
+if executable('ag')
+  set grepprg=ag\ --nogroup\ --nocolor
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   let g:ctrlp_use_caching = 0
 endif
 

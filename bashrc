@@ -1,6 +1,6 @@
 # ENV variables
 export GEM_EDITOR="vim"
-export PATH="/usr/local/bin:/usr/local/share/npm/bin:$HOME/.rvm/bin:/usr/local/sbin:$PATH"
+export PATH="$PATH:/usr/local/bin:/usr/local/share/npm/bin:$HOME/.rvm/bin:/usr/local/sbin"
 export LC_CTYPE=en_US.UTF-8
 export EDITOR=vim
 export EVENT_NOKQUEUE=1
@@ -8,6 +8,7 @@ export HISTCONTROL=erasedups
 export ARCHFLAGS='-arch x86_64'
 export AUTOFEATURE=true
 export TERM="screen-256color"
+export PHANTOMJS_BIN="~/src/qdw-web/node_modules/.bin/"
 # export RUBYOPT="-W0"
 
 shopt -s histappend
@@ -27,6 +28,7 @@ alias ebash="vim ~/.bashrc"
 alias sbash="source ~/.bashrc"
 alias rmds="find . -name *.DS_Store -type f -exec rm {} \;"
 alias npm-exec='PATH=$(npm bin):$PATH'
+alias vim='nvim'
 
 # tmux aliases
 alias tnew="tmux new -s"
@@ -83,6 +85,11 @@ COLOR_YELLOW='\[\e[33m\]'
 COLOR_BLUE='\[\e[34m\]'
 COLOR_RESET='\[\e[0m\]'
 
+# get clean git br name
+function gitbs () {
+  git br | grep "$1" | tr -d '\n' | tr -d '*' | tr -d ' ' | pbcopy
+}
+
 # git branch
 function _current_git_branch {
   local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null);
@@ -98,4 +105,4 @@ if [ -f ~/.work.bashrc ]; then source ~/.work.bashrc ; fi
 
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
