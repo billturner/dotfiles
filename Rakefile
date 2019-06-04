@@ -10,7 +10,7 @@ DOTFILES_DIR = File.expand_path(File.dirname(__FILE__))
 namespace :install do
   desc 'Add all symlinks'
   task :symlinks do
-    %w{gitignore gitconfig vimrc gvimrc agignore ackrc ctags irbrc gemrc bash_profile bashrc tmux.conf railsrc psqlrc vim sbclrc emacs.d}.each do |sym|
+    %w{gitignore gitconfig vimrc gvimrc agignore ackrc ctags irbrc gemrc bash_profile bashrc tmux.conf railsrc psqlrc vim zshrc}.each do |sym|
       # first, move existing files and directories to NAME.old
       if File.symlink?("#{HOME_DIR}/.#{sym}")
         puts "Removing old symlink for .#{sym}"
