@@ -12,13 +12,14 @@ Plug 'idanarye/vim-merginal'
 " Syntax checking
 Plug 'w0rp/ale'
 
+" autocomplete
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+
 " Javascript
-Plug 'jelera/vim-javascript-syntax'
-Plug 'pangloss/vim-javascript'
 Plug 'isRuslan/vim-es6'
 Plug 'elzr/vim-json'
-Plug 'mxw/vim-jsx'
 Plug 'kchmck/vim-coffee-script'
+Plug 'sheerun/vim-polyglot'
 
 " Ruby/Rails
 Plug 'tpope/vim-rails'
@@ -27,9 +28,9 @@ Plug 'nelstrom/vim-textobj-rubyblock'
 
 " Design/Navigation
 Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
-Plug 'scrooloose/nerdtree'
 Plug 'easymotion/vim-easymotion'
 Plug 'chriskempson/base16-vim'
 
@@ -172,9 +173,6 @@ set noswapfile
 set nobackup
 set nowritebackup
 
-" Helpful commands
-command! Jsonf %!python -m json.tool
-
 " Other filetypes
 if has("autocmd")
   " ruby
@@ -196,10 +194,21 @@ endif
 " let g:prettier#config#bracket_spacing = 'false'
 " let g:prettier#config#trailing_comma = 'none'
 
+" coc.vim
+let g:ruby_host_prog = '~/.rvm/rubies/ruby-2.4.2/bin/ruby'
+let g:coc_node_path = "/usr/local/bin/node"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+
 " ale:
 let g:ale_linters = {
 \ 'javascript': ['eslint', 'prettier'],
+\ 'python': ['pep8'],
 \ 'ruby': ['rubocop', 'ruby']
+\}
+let g:ale_fixers = {
+\ 'python': ['autopep8']
 \}
 let g:ale_set_highlights = 0
 let g:ale_lint_on_save = 1
@@ -215,6 +224,16 @@ let g:javascript_plugin_flow = 1
 
 " vim-jsx:
 let g:jsx_ext_required = 0
+
+" Fzf
+" nnoremap <Leader>t :Files<CR>
+" nnoremap <Leader>b :Buffers<CR>
+" command! -bang -nargs=* Rg
+"   \ call fzf#vim#grep(
+"   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
+"   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+"   \   <bang>0)
 
 " ctrlp:
 nnoremap <Leader>t :CtrlP<CR>
@@ -235,28 +254,25 @@ let g:ctrlp_max_files=0
 " endif
 
 " let us use ag again
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_use_caching = 0
-endif
+" if executable('ag')
+"   set grepprg=ag\ --nogroup\ --nocolor
+"   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+"   let g:ctrlp_use_caching = 0
+" endif
 
 " delimitMate
 let g:delimitMate_expand_cr = 1
 
-" Nerdtree
-map <leader>n :NERDTreeToggle<CR>
-map <leader>f :NERDTreeFind<CR>
-
-let g:NERDTreeWinPos="left"
-let g:NERDTreeShowHidden=1
-let g:NERDTreeMinimalUI=1
-let g:NERDTreeWinSize=30
-au Filetype nerdtree setlocal nolist
-
-" Don't just leave Nerdtree as only window
-" via: https://stackoverflow.com/a/4319165
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" netrw
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 0
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+let g:netrw_fastbrowse = 0
+autocmd FileType netrw set nolist
+autocmd FileType netrw setl bufhidden=wipe
+map <leader>n :Explore<CR>
 
 " vim-rails
 let g:rails_statusline=0

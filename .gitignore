@@ -9,3 +9,4 @@ emacs.d/eshell
 emacs.d/quicklisp/tmp/
 emacs.d/quicklisp/local-projects/
 emacs.d/quicklisp/dists/quicklisp/
+vim/.netrwhist
