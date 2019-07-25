@@ -18,3 +18,6 @@ source $ZSH/oh-my-zsh.sh
 
 # load general aliases, ENV settings, etc
 if [ -f ~/.env.sh ]; then source ~/.env.sh ; fi
+
+# ZSH specific aliases
+alias rake='noglob rake'

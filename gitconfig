@@ -13,7 +13,7 @@
 [mirror]
 	summary = true
 [core]
-	editor = vim
+	editor = nvim
 	excludesfile = /Users/bill.turner/.gitignore_global
 [github]
 	user = billturner
