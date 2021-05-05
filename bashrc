@@ -1,6 +1,5 @@
 # ENV variables
 export GEM_EDITOR="vim"
-export PATH="$PATH:/usr/local/bin:/usr/local/share/npm/bin:$HOME/.rvm/bin:/usr/local/sbin"
 export LC_CTYPE=en_US.UTF-8
 export EDITOR=vim
 export EVENT_NOKQUEUE=1
@@ -11,7 +10,7 @@ export TERM="screen-256color"
 export PHANTOMJS_BIN="~/src/qdw-web/node_modules/.bin/"
 # export RUBYOPT="-W0"
 
-shopt -s histappend
+# shopt -s histappend
 
 # helper aliases
 alias ls="ls -laGF"
@@ -68,6 +67,11 @@ function tmux_colors {
   done
 }
 
+# alias kp="ps aux | grep puma | grep etc | awk '{print \$2}' | xargs kill"
+# function kpuma() {
+#   ps aux | grep puma | grep etc | awk '{print \$2}' | xargs kill
+# }
+
 # prompt stuff
 # * color tips from: http://blog.sanctum.geek.nz/bash-prompts/
 COLOR_RED='\[\e[0;2;31m\]'
@@ -97,3 +101,5 @@ if [ -f ~/.work.bashrc ]; then source ~/.work.bashrc ; fi
 # [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

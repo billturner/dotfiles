@@ -21,3 +21,7 @@ if [ -f ~/.env.sh ]; then source ~/.env.sh ; fi
 
 # ZSH specific aliases
 alias rake='noglob rake'
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

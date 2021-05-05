@@ -7,7 +7,7 @@ call plug#begin('~/.vim/plugged')
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'idanarye/vim-merginal'
+" Plug 'idanarye/vim-merginal'
 
 " Syntax checking
 Plug 'w0rp/ale'
@@ -18,7 +18,6 @@ Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 " Javascript
 Plug 'isRuslan/vim-es6'
 Plug 'elzr/vim-json'
-Plug 'kchmck/vim-coffee-script'
 Plug 'sheerun/vim-polyglot'
 
 " Ruby/Rails
@@ -27,24 +26,15 @@ Plug 'janx/vim-rubytest'
 Plug 'nelstrom/vim-textobj-rubyblock'
 
 " Design/Navigation
-Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'junegunn/fzf.vim'
-Plug 'majutsushi/tagbar'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'chriskempson/base16-vim'
-
-" Snippets
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-Plug 'garbas/vim-snipmate'
+Plug 'morhetz/gruvbox'
 
 " General
-Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'kana/vim-textobj-user'
-Plug 'tpope/vim-ragtag'
 Plug 'tpope/vim-surround'
 Plug 'tommcdo/vim-lion'
 
@@ -60,10 +50,8 @@ endif
 let mapleader=","
 
 " colorscheme
-if &t_Co >= 256 || has("gui_running")
-  set background=dark
-  colorscheme base16-oceanicnext
-endif
+set background=dark
+colorscheme gruvbox
 
 " filetype/encoding
 filetype plugin on
@@ -90,7 +78,6 @@ set expandtab
 
 " statusline
 set laststatus=2
-
 if has("statusline")
   " hi StatusLine ctermbg=145 ctermfg=Black
   set statusline=""
@@ -105,7 +92,7 @@ if has("statusline")
   set statusline+=\ %#warningmsg#
   set statusline+=%{exists('g:loaded_syntastic_plugin')?SyntasticStatuslineFlag():''}
   set statusline+=%*
-  set statusline+=\ 
+  set statusline+=\
 endif
 
 " searching/tab completion
@@ -119,19 +106,19 @@ set wildmenu
 set wildmode=list:longest,list:full
 
 " ignore image and doc files
-set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.pdf,*.doc,*.docx,*.xls,*.xlsx
+" set wildignore+=*.jpg,*.jpeg,*.png,*.gif,*.pdf,*.doc,*.docx,*.xls,*.xlsx
 " ignore font files
-set wildignore+=*.ttf,*.otf,*.woff,*.woff2,*.eot
+" set wildignore+=*.ttf,*.otf,*.woff,*.woff2,*.eot
 " ignore annoying mac files
-set wildignore+=.DS_Store,.localized
+" set wildignore+=.DS_Store,.localized
 " ignore repository configs
-set wildignore+=.hg,.svn,.git
+" set wildignore+=.hg,.svn,.git
 " ignore logfiles in general
-set wildignore+=*.log
+" set wildignore+=*.log
 " ignore build directories
-set wildignore+=*/build/**,*/dist/**,*/target/**
+" set wildignore+=*/build/**,*/dist/**,*/target/**
 " ignore other things
-set wildignore+=*/vendor/*,*/node_modules/**,*/bower_components/**,*/tmp/**,*/coverage/**
+" set wildignore+=*/vendor/*,*/node_modules/**,*/bower_components/**,*/tmp/**,*/coverage/**
 
 " navigation/editing helpers
 imap <c-e> <c-o>$
@@ -176,7 +163,7 @@ set nowritebackup
 " Other filetypes
 if has("autocmd")
   " ruby
-  autocmd BufNewFile,BufRead {Gemfile,Rakefile,Vagrantfile,Thorfile,config.ru} setlocal ft=ruby
+  autocmd BufNewFile,BufRead {Gemfile,Rakefile} setlocal ft=ruby
   " javascript
   autocmd BufNewFile,BufRead *.ts,*.json,*.es6,*.jsx setlocal ft=javascript
   autocmd BufNewFile,BufRead *.vue setlocal filetype=vue.html.javascript.css
@@ -184,6 +171,8 @@ if has("autocmd")
   autocmd BufNewFile,BufRead *.markdown,*.mkd,*.md setlocal ft=markdown
   autocmd FileType markdown setlocal wrap linebreak nonumber norelativenumber nolist colorcolumn=
   autocmd FileType python setlocal shiftwidth=4 tabstop=4
+  " strip trailing spaces
+  autocmd FileType javascript,python,ruby autocmd BufWritePre <buffer> %s/\s\+$//e
 endif
 
 "
@@ -196,7 +185,7 @@ endif
 
 " coc.vim
 let g:ruby_host_prog = '~/.rvm/rubies/ruby-2.4.2/bin/ruby'
-let g:coc_node_path = "/usr/local/bin/node"
+" let g:coc_node_path = "/usr/local/bin/node"
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
@@ -225,26 +214,6 @@ let g:javascript_plugin_flow = 1
 " vim-jsx:
 let g:jsx_ext_required = 0
 
-" Fzf
-" nnoremap <Leader>t :Files<CR>
-" nnoremap <Leader>b :Buffers<CR>
-" command! -bang -nargs=* Rg
-"   \ call fzf#vim#grep(
-"   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-"   \   <bang>0 ? fzf#vim#with_preview('up:60%')
-"   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-"   \   <bang>0)
-
-" ctrlp:
-nnoremap <Leader>t :CtrlP<CR>
-nnoremap <Leader>b :CtrlPBuffer<CR>
-
-let g:ctrlp_clear_cache_on_exit=1
-let g:ctrlp_max_depth=100
-let g:ctrlp_working_path_mode=''
-let g:ctrlp_show_hidden=1
-let g:ctrlp_max_files=0
-
 " if ripgrep is installed, let's use it
 " if executable('rg')
 "   set grepprg=rg\ --color=never
@@ -261,7 +230,7 @@ let g:ctrlp_max_files=0
 " endif
 
 " delimitMate
-let g:delimitMate_expand_cr = 1
+" let g:delimitMate_expand_cr = 1
 
 " netrw
 let g:netrw_banner = 0
@@ -287,12 +256,17 @@ let g:rubytest_cmd_testcase = "ruby -I test %p -n '/%c/'"
 let g:rubytest_cmd_spec = "SKIP_SIMPLECOV=true bundle exec rspec '%p' --format progress"
 let g:rubytest_cmd_example = "SKIP_SIMPLECOV=true bundle exec rspec '%p':'%c' --format progress"
 
-" Ack/Silver Searcher/ripgrep
+" fzf/ripgrep/ack
+nnoremap <leader>t :Files<CR>
+nnoremap <leader>b :Buffers<CR>
+
 if executable('rg')
   let g:ackprg = 'rg --vimgrep --no-heading'
 elseif executable('ag')
   let g:ackprg = 'ag --nocolor --nogroup'
 endif
+
+" Ack
 nnoremap <leader>a :Ack!<Space>
 nnoremap <Leader>A :Ack! "<C-r><C-w>"<CR>
 
@@ -303,9 +277,9 @@ let g:gitgutter_eager = 0
 highlight clear SignColumn
 
 " tagbar & tags related
-nnoremap <leader>r :TagbarToggle<CR>
-nmap <Leader>R :!ctags --exclude=tmp --exclude=tags --exclude=coverage --exclude=.git --exclude=log --extra=+f -R *<CR><CR>
-nmap <C-\> :tnext<CR>
+" nnoremap <leader>r :TagbarToggle<CR>
+" nmap <Leader>R :!ctags --exclude=tmp --exclude=tags --exclude=coverage --exclude=.git --exclude=log --extra=+f -R *<CR><CR>
+" nmap <C-\> :tnext<CR>
 
 " use matchit
 runtime macros/matchit.vim
